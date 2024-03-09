@@ -23,5 +23,7 @@ class Platform extends PositionComponent with CollisionCallbacks {
     // Passive, because we don't want platforms to
     // collide with each other.
     await add(RectangleHitbox()..collisionType = CollisionType.passive);
+
+
   }
 }

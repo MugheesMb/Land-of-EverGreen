@@ -29,7 +29,7 @@ class Hud extends Component with  HasGameReference<MyGame> , ParentIsA<Viewport>
   @override
   Future<void> onLoad() async {
 
-    final spriteImage = await Sprite.load('star.png');
+    final spriteImage = await Sprite.load('play.png');
     healthTextComponent = TextComponent(
       text: 'x5',
       anchor: Anchor.topRight,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ever_green/game/game.dart';
-import 'package:ever_green/main.dart';
-import 'package:ever_green/routes/GamePlay.dart';
+import 'package:gitlab_hero/game/game.dart';
+import 'package:gitlab_hero/main.dart';
+import 'package:gitlab_hero/routes/GamePlay.dart';
 
 import 'MainMenu.dart';
 
@@ -80,7 +80,7 @@ class PauseMenu extends StatelessWidget {
                  // gameRef.overlays.remove(PauseMenu.id);
                  // gameRef.reset();
                   gameRef.resumeEngine();
-                  //gameRef.popRoute();
+                  gameRef.popRoute();
 
                   gameRef.router.pushReplacementNamed(MainMenu.id);
                 },

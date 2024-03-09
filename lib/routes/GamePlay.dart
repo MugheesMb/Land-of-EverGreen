@@ -1,5 +1,12 @@
 import 'dart:math';
+import 'dart:ui';
+import 'package:flame/collisions.dart';
+import 'package:flame/input.dart'; // Import for keyboard input
 
+import 'package:flame/camera.dart';
+import 'package:flame/components.dart';
+import 'package:flame/experimental.dart';
+import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'dart:async';
@@ -8,40 +15,60 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/sprite.dart';
-import 'package:ever_green/game/enemy.dart';
-import 'package:ever_green/game/gound.dart';
+import 'package:gitlab_hero/game/bottle.dart';
+import 'package:gitlab_hero/game/enemy.dart';
+import 'package:gitlab_hero/game/game.dart';
+import 'package:gitlab_hero/game/gound.dart';
+import 'package:gitlab_hero/game/plate.dart';
+import 'package:gitlab_hero/game/shopper.dart';
 import '../game/Player.dart';
+import '../game/bullet.dart';
 import '../game/gem.dart';
 import 'package:flame/experimental.dart';
 
+import '../game/grounf2.dart';
+import '../hud/game_data.dart';
+import '../hud/hud.dart';
 
 
 
-class GamePlay extends Component with KeyboardHandler , HasGameRef{
+
+class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame>{
   GamePlay(this.currentLevel,  {super.key, this.onPausePressed} );
   static const id  = 'GamePlay';
 
-  final fixedResolution = Vector2(640, 360);
+  final fixedResolution = Vector2(620, 320);
   final int currentLevel;
   final VoidCallback? onPausePressed;
   late Sprite _sprite;
   late Player _player;
   late final CameraComponent camera;
 
+
+
+
+  final hud = Hud();
   @override
   Future<void> onLoad() async {
+
 print('current: $currentLevel' );
-      final map = await TiledComponent.load('mb2.tmx', Vector2.all(16));
+      final map = await TiledComponent.load('mb3.tmx', Vector2.all(16));
+
 
 
       final world = World(children: [map]);
     await add(world);
     camera = CameraComponent.withFixedResolution(
-      width: 640, height: 360, world: world
+      width: 620, height: 320, world: world
     );
     await add(camera);
 
+    game.plData.health.value = 5;
+//camera.follow(player);
     camera.moveTo(camera.viewport.virtualSize * 0.5);
+    await camera.viewport.addAll([hud]);
+
+
 
 final ground = map.tileMap.getLayer<ObjectGroup>('Ground');
 
@@ -54,21 +81,72 @@ for (final gemm in ground!.objects) {
         size: Vector2( gemm.width, gemm.height),
         anchor: Anchor.centerLeft
         ,);
+
       await world.add(gro);
       break;
+
   }
 
 }
+
+    final rounddrums = map.tileMap.getLayer<ObjectGroup>('Drums');
+
+    for (final drumR in rounddrums!.objects) {
+      switch (drumR.class_) {
+        case 'drum':
+          final vertices = <Vector2>[];
+
+          for (final point in drumR.polygon) {
+            vertices.add(Vector2(point.x * 0.5, point.y * 0.5));
+          }
+          final trail = TrailPoly(
+            position: Vector2(drumR.x * 0.5, drumR.y * 0.5),
+            vertices: vertices,
+          );
+          await map.add(trail);
+          break;
+      }
+    }
+
+    final trashplas = map.tileMap.getLayer<ObjectGroup>('trash');
+
+    for (final plast in trashplas!.objects) {
+      final position = Vector2(plast.x * 0.5, plast.y * 0.5);
+      final size = Vector2(plast.width, plast.height);
+      switch (plast.class_) {
+        case 'plate':
+          final platee = Plate(
+            position: position ,
+            targetPosition: Vector2(plast!.x * 0.5, plast!.y * 0.5),
+          );
+          await world.add(platee);
+          break;
+        case 'shopper':
+          final shopp = Shopper(
+            position: position ,
+            targetPosition: Vector2(plast!.x * 0.5, plast!.y * 0.5),
+          );
+          await world.add(shopp);
+          break;
+        case 'bottle':
+          final shopp = Bottle(
+            position: position ,
+            targetPosition: Vector2(plast!.x * 0.5, plast!.y * 0.5),
+          );
+          await world.add(shopp);
+          break;
+      }
+    }
 
 final spawnPointLayer = map.tileMap.getLayer<ObjectGroup>('SpawnPoints');
 final objects = spawnPointLayer?.objects;
 
 if(objects != null) {
-  for (final object in objects) {
-    final position = Vector2(object.x * 0.5, object.y * 0.5);
-    final size = Vector2(object.width, object.height);
+  for (final objc in objects) {
+    final position = Vector2(objc.x * 0.5, objc.y * 0.5);
+    final size = Vector2(objc.width, objc.height);
 
-    switch(object.class_){
+    switch(objc.class_){
       case 'Player':
         final halfSize = size * 0.5;
         final levelBounds = Rect.fromLTWH(
@@ -87,17 +165,23 @@ if(objects != null) {
 
         )..debugMode = true;
         await world.add(_player);
-
+        break;
       case 'coins':
-        var gim =  Gem(tiledObject:  object)
-          ..sprite = await Sprite.load('star.png')
+        var gim =  Gem()
+          ..sprite = await Sprite.load('t2.png')
           ..position = position
           ..size = size
           ..anchor = Anchor.centerRight;
         await world.add(gim);
+        break;
       case 'enemy':
+        final targetObjectId =
+        int.parse(objc.properties.first.value.toString());
+        final target = spawnPointLayer?.objects
+            .firstWhere((object) => object.id == targetObjectId);
         final enemy = Enemy(
           position: position ,
+          targetPosition: Vector2(target!.x * 0.5, target!.y * 0.5),
 
         )..debugMode = true;
         await world.add(enemy);
@@ -107,32 +191,47 @@ if(objects != null) {
 
   _setupCamera(map);
 }
+    Bullet bullet = Bullet(
+      sprite:  game.bu,
+      size: Vector2(54, 54),
+      position: this._player.position.clone(),
+    );
+    bullet.anchor = Anchor.center;
+    world.add(bullet);
 
 
 
-return super.onLoad();
+    return super.onLoad();
 
   }
 
- void _setupCamera(TiledComponent level) {
-    camera.follow(_player, maxSpeed: 200);
+
+void _setupCamera(TiledComponent level) {
+    camera.follow(_player, maxSpeed: 250);
    camera.setBounds(
       Rectangle.fromLTRB(
 
         fixedResolution.x / 2,
         fixedResolution.y / 2,
-        level.width - fixedResolution.x / 2,
-        level.height - fixedResolution.y / 2,
+        level.width - fixedResolution.x / 1,
+        level.height - fixedResolution.y / 1,
       ),
     );
   }
+
+
+
+
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     if(keysPressed.contains(LogicalKeyboardKey.keyP)) {
       onPausePressed?.call();
     }
+
+  //  return KeyEventResult.ignored;
     return super.onKeyEvent(event, keysPressed);
 
   }
+
 }

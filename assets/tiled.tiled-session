@@ -1,0 +1,410 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "tiles/mb2.tmx",
+    "expandedProjectPaths": [
+        "tiles",
+        "images",
+        "."
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 0.3045,
+            "scaleInEditor": 1
+        },
+        "#aqua": {
+            "scaleInDock": 0.2336
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx": {
+            "expandedObjectLayers": [
+                7
+            ],
+            "scale": 0.3015,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 3825.8706467661696,
+                "y": 429.5190713101161
+            }
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#alie": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#aliennn": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#aqua": {
+            "scaleInDock": 0.2076
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#bg1": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#bg2": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#bg3": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#ground": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#kk": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#mkmkmkm": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#star": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.01
+        },
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx#starnn": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Downloads/map.tmx": {
+            "scale": 1.6815,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 497.7698483496878,
+                "y": 295.2720785013381
+            }
+        },
+        "/Users/mugy/Downloads/map.tmx#level_ice_tileset": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/Downloads/map.tmx#level_standard_tileset": {
+            "scaleInDock": 1
+        },
+        "/Users/mugy/mapp/bg1.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "images/2.tsx": {
+            "dynamicWrapping": false,
+            "scaleInEditor": 1
+        },
+        "images/3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.36
+        },
+        "images/4.tsx": {
+            "scaleInEditor": 0.36
+        },
+        "images/6.tsx": {
+            "scaleInEditor": 1
+        },
+        "images/7.tsx": {
+            "scaleInEditor": 1
+        },
+        "images/alie.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 0.39
+        },
+        "images/alie2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.39
+        },
+        "images/bg2.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.1572,
+            "scaleInEditor": 0.48
+        },
+        "images/c1.tsx": {
+            "scaleInEditor": 1
+        },
+        "images/c3.tsx": {
+            "scaleInEditor": 1
+        },
+        "images/c4.tsx": {
+            "scaleInEditor": 1
+        },
+        "images/cave2.tsx": {
+            "dynamicWrapping": false
+        },
+        "images/dus.tsx": {
+            "scaleInEditor": 1
+        },
+        "images/idle.tsx": {
+            "scaleInDock": 0.07,
+            "scaleInEditor": 0.18
+        },
+        "images/idle2.tsx": {
+            "scaleInDock": 0.1199,
+            "scaleInEditor": 0.18
+        },
+        "images/road.tsx": {
+            "scaleInDock": 0.1904,
+            "scaleInEditor": 1
+        },
+        "images/rt.tsx": {
+            "scaleInDock": 0.2235,
+            "scaleInEditor": 1
+        },
+        "images/stone.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "images/tre2.tsx": {
+            "scaleInDock": 0.1991,
+            "scaleInEditor": 1
+        },
+        "images/try (4).tsx": {
+            "scaleInDock": 0.4031,
+            "scaleInEditor": 1
+        },
+        "tiles/aqua.tsx": {
+            "dynamicWrapping": false
+        },
+        "tiles/bg3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.36
+        },
+        "tiles/last.tsx": {
+            "scaleInEditor": 1
+        },
+        "tiles/map.tmx": {
+            "scale": 0.49844155844155835,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 608.8978634705577,
+                "y": 468.460135487233
+            }
+        },
+        "tiles/map.tmx#level_ice_tileset": {
+            "scaleInDock": 1
+        },
+        "tiles/map.tmx#level_standard_tileset": {
+            "scaleInDock": 1
+        },
+        "tiles/map2.tmx": {
+            "scale": 0.2375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 856.8421052631579,
+                "y": 486.31578947368416
+            }
+        },
+        "tiles/map2.tmx#Bush (4)": {
+            "scaleInDock": 1
+        },
+        "tiles/map2.tmx#bg": {
+            "scaleInDock": 1
+        },
+        "tiles/map2.tmx#gem": {
+            "scaleInDock": 1
+        },
+        "tiles/map2.tmx#groundTiles": {
+            "scaleInDock": 1
+        },
+        "tiles/map3.tmx": {
+            "scale": 0.095,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 3994.7368421052633,
+                "y": 1310.526315789474
+            }
+        },
+        "tiles/map3.tmx#bg1": {
+            "scaleInDock": 1
+        },
+        "tiles/map3.tmx#bg2": {
+            "scaleInDock": 1
+        },
+        "tiles/map3.tmx#bg3": {
+            "scaleInDock": 1
+        },
+        "tiles/map3.tmx#ground": {
+            "scaleInDock": 1
+        },
+        "tiles/map3.tmx#star": {
+            "scaleInDock": 1
+        },
+        "tiles/mb.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.44,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 162.5,
+                "y": 328.409090909091
+            }
+        },
+        "tiles/mb.tmx#star": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx": {
+            "expandedObjectLayers": [
+                5,
+                10,
+                6
+            ],
+            "scale": 0.08,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1118.75,
+                "y": 306.25
+            }
+        },
+        "tiles/mb2.tmx#1": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#2": {
+            "scaleInDock": 0.2909
+        },
+        "tiles/mb2.tmx#3": {
+            "scaleInDock": 0.3804
+        },
+        "tiles/mb2.tmx#4": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#5": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#6": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#7": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#bg": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#c1": {
+            "scaleInDock": 0.3514
+        },
+        "tiles/mb2.tmx#c2": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#c3": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#c4": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#plat": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#star": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#tre": {
+            "scaleInDock": 1
+        },
+        "tiles/mb2.tmx#tree": {
+            "scaleInDock": 1
+        },
+        "tiles/mb3.tmx": {
+            "expandedObjectLayers": [
+                5,
+                8,
+                6
+            ],
+            "scale": 0.1326,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 1904.2232277526393,
+                "y": 1542.2322775263951
+            }
+        },
+        "tiles/mb3.tmx#a": {
+            "scaleInDock": 0.4893
+        },
+        "tiles/mb3.tmx#b": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.2255
+        },
+        "tiles/mb3.tmx#d": {
+            "scaleInDock": 0.177
+        },
+        "tiles/mb3.tmx#f": {
+            "scaleInDock": 0.0939
+        },
+        "tiles/mb3.tmx#star": {
+            "scaleInDock": 0.24
+        },
+        "tiles/mb7.tmx": {
+            "scale": 0.1557,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 350.03211303789317,
+                "y": 1255.6197816313424
+            }
+        },
+        "tiles/ml.tmx": {
+            "scale": 0.0665283203125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 7996.5944954128445,
+                "y": 969.5119266055053
+            }
+        },
+        "tiles/mp.tmx": {
+            "scale": 0.04931640625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 8972.673267326732,
+                "y": 4146.693069306932
+            }
+        },
+        "tiles/my.tmx": {
+            "scale": 0.26,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 755.7692307692306,
+                "y": 294.23076923076917
+            }
+        },
+        "tiles/sloth.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/star.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 0.39
+        },
+        "tiles/up.tmx": {
+            "scale": 0.0833,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2304.9219687875147,
+                "y": 414.1656662665073
+            }
+        }
+    },
+    "last.imagePath": "/Users/mugy/Gitlab_Hero/assets/images",
+    "map.height": 50,
+    "map.width": 250,
+    "openFiles": [
+        "tiles/my.tmx",
+        "/Users/mugy/Desktop/mical/assets/tiles/map3.tmx",
+        "tiles/mp.tmx",
+        "tiles/sloth.tsx",
+        "tiles/mb3.tmx",
+        "tiles/mb2.tmx"
+    ],
+    "project": "tiled.tiled-project",
+    "property.type": "object",
+    "recentFiles": [
+        "images/stone.tsx",
+        "images/try (4).tsx",
+        "images/rt.tsx",
+        "images/tre2.tsx",
+        "tiles/last.tsx",
+        "images/dus.tsx",
+        "images/2.tsx",
+        "images/6.tsx",
+        "images/road.tsx",
+        "images/c4.tsx",
+        "images/7.tsx",
+        "images/c1.tsx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFormat": "tsx"
+}

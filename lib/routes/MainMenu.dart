@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../game/story.dart';
+
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key, this.onPlayPressed , this.onSettingPressed});
@@ -18,7 +20,7 @@ class MainMenu extends StatelessWidget {
           constraints: BoxConstraints.expand(),
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/wat3.gif"), fit: BoxFit.cover),
+                image: AssetImage("assets/images/MM.gif"), fit: BoxFit.cover),
           ),
           child: Center(
               child: Column(
@@ -27,7 +29,7 @@ class MainMenu extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 50.0),
                     child: Text(
-                      'Aqua Vs Alien',
+                      'to be decided',
                       style: TextStyle(
                         fontSize: 50.0,
                         color: Colors.black,
@@ -44,10 +46,22 @@ class MainMenu extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 3,
                     child: ElevatedButton(
-                      onPressed: onPlayPressed,
+                      onPressed: () {
+                        // Navigate to the SceneShowcase widget
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SceneShowcase(
+                            onGameStart: () {
+                              // Pop back to the MainMenu and then invoke the onPlayPressed callback
+                              Navigator.of(context).pop();
+                              onPlayPressed?.call();
+                            },
+                          ),
+                        ));
+                      },
                       child: Text('play'),
                     ),
-                  ),
+                    ),
+
                   SizedBox(
                     height: 30.0,
                   ),
