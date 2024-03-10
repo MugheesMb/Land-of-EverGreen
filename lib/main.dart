@@ -1,8 +1,8 @@
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:gitlab_hero/game/game.dart';
-import 'package:gitlab_hero/routes/boot_screen.dart';
+import 'package:ever_green/game/game.dart';
+import 'package:ever_green/routes/boot_screen.dart';
 
 
 

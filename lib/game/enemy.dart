@@ -5,7 +5,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
-import 'package:gitlab_hero/game/Player.dart';
+import 'package:ever_green/game/Player.dart';
 import 'package:flame_audio/flame_audio.dart';
 import '../routes/GamePlay.dart';
 import 'game.dart';

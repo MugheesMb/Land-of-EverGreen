@@ -4,7 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import '../utils/constants.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:gitlab_hero/game/game.dart';
+import 'package:ever_green/game/game.dart';
 
 class BootScreen extends StatefulWidget {
   const BootScreen({super.key});

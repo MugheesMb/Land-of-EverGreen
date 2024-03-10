@@ -2,14 +2,14 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide OverlayRoute, Route;
-import 'package:gitlab_hero/game/story.dart';
-import 'package:gitlab_hero/routes/GamePlay.dart';
-import 'package:gitlab_hero/routes/MainMenu.dart';
-import 'package:gitlab_hero/routes/PauseMenu.dart';
-import 'package:gitlab_hero/routes/Retry.dart';
-import 'package:gitlab_hero/routes/levelSelection.dart';
-import 'package:gitlab_hero/routes/level_com.dart';
-import 'package:gitlab_hero/routes/settings.dart';
+import 'package:ever_green/game/story.dart';
+import 'package:ever_green/routes/GamePlay.dart';
+import 'package:ever_green/routes/MainMenu.dart';
+import 'package:ever_green/routes/PauseMenu.dart';
+import 'package:ever_green/routes/Retry.dart';
+import 'package:ever_green/routes/levelSelection.dart';
+import 'package:ever_green/routes/level_com.dart';
+import 'package:ever_green/routes/settings.dart';
 
 import '../hud/game_data.dart';
 

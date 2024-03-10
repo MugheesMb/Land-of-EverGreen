@@ -2,8 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gitlab_hero/game/Player.dart';
-import 'package:gitlab_hero/routes/GamePlay.dart';
+import 'package:ever_green/game/Player.dart';
+import 'package:ever_green/routes/GamePlay.dart';
 import 'package:tiled/tiled.dart';
 import 'package:flutter/animation.dart';
 

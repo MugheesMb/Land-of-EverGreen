@@ -6,12 +6,12 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flutter/services.dart';
-import 'package:gitlab_hero/game/game.dart';
-import 'package:gitlab_hero/game/gem.dart';
-import 'package:gitlab_hero/game/gound.dart';
+import 'package:ever_green/game/game.dart';
+import 'package:ever_green/game/gem.dart';
+import 'package:ever_green/game/gound.dart';
 import 'dart:math' as Math;
 import 'package:flame_audio/flame_audio.dart';
-import 'package:gitlab_hero/game/grounf2.dart';
+import 'package:ever_green/game/grounf2.dart';
 
 import 'bullet.dart';
 
