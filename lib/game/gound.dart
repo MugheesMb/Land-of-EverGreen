@@ -16,7 +16,8 @@ class Platform extends PositionComponent with CollisionCallbacks {
     scale: scale,
     angle: angle,
     anchor: anchor,
-  ){debugMode = true;}
+  );
+  //{debugMode = true;}
 
   @override
   Future<void> onLoad() async {

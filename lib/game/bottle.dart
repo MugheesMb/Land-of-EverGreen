@@ -4,14 +4,14 @@ import 'package:flame/effects.dart';
 import 'package:gitlab_hero/game/Player.dart';
 import 'package:tiled/tiled.dart';
 import 'package:flutter/animation.dart';
-
+import 'package:flame_audio/flame_audio.dart';
 import 'game.dart';
 
 
 class Bottle extends SpriteAnimationComponent with  HasGameReference<MyGame> , CollisionCallbacks {
-  Bottle({super.position, super.size, Vector2? targetPosition, }): super(){
-    debugMode = true;
-  }
+
+  bool hasCollided = false;
+  Bottle({super.position, super.size, Vector2? targetPosition, }): super();
 
 
   @override
@@ -48,9 +48,13 @@ class Bottle extends SpriteAnimationComponent with  HasGameReference<MyGame> , C
 
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
-    if (other is Player) {
+    if (other is Player && !hasCollided) {
+      if(game.sfxValueNotifier.value){
+        FlameAudio.play(MyGame.plasticT);
+      }
       removeAppearance();
-      game.plData.score.value += 1;
+      game.plData.plastic.value += 1;
+      hasCollided = true;
     }
   }
 
@@ -63,5 +67,12 @@ class Bottle extends SpriteAnimationComponent with  HasGameReference<MyGame> , C
       ),
       ScaleEffect.by(Vector2.all(1.2),LinearEffectController(0.4),)
     ]);
+  }
+  @override
+  void onCollisionEnd(PositionComponent other) {
+    super.onCollisionEnd(other);
+    if (other is Player) {
+      hasCollided = false; // Reset flag when player collision ends
+    }
   }
 }

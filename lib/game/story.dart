@@ -14,13 +14,15 @@ class SceneShowcase extends StatefulWidget {
 
 class _SceneShowcaseState extends State<SceneShowcase> {
   final List<String> _scenes = [
-    'assets/images/aqua.gif',
-    'assets/images/wat3.gif',
+    'assets/images/m1.gif',
+    'assets/images/m2.gif',
+    'assets/images/m3.gif',
     // Add more paths to your asset GIFs here
   ];
   final List<String> _texts = [
-    'Scene 1 Description',
-    'Scene 2 Description',
+    '"Once upon a time, Evergreen was the heartbeat of nature, a symphony of green melodies.',
+    'But one day, a villain named Dr. Wasteland decided to play a different tune. Plastic confetti rained down, turning our lively Evergreen into a silent, plastic maze.',
+    'After plastics invasion, Evergreen fell silent. But I believe we can revive its melody. Will you join the Green Awakening?',
     // Add more descriptions here
   ];
   int _currentIndex = 0;
@@ -37,7 +39,7 @@ class _SceneShowcaseState extends State<SceneShowcase> {
   }
 
   void _startSceneShowcase() {
-    _timer = Timer(Duration(seconds: 5), () {
+    _timer = Timer(Duration(seconds: 7), () {
       if (_currentIndex < _scenes.length - 1) {
         setState(() {
           _currentIndex++;
@@ -54,7 +56,7 @@ class _SceneShowcaseState extends State<SceneShowcase> {
   void _animateText(String text) {
     int index = 0;
     _textAnimationTimer?.cancel(); // Cancel any existing timer
-    _textAnimationTimer = Timer.periodic(Duration(milliseconds: 150), (timer) {
+    _textAnimationTimer = Timer.periodic(Duration(milliseconds: 30), (timer) {
       if (index < text.length) {
         setState(() {
           _animatedText += text[index];
@@ -114,13 +116,16 @@ class _SceneShowcaseState extends State<SceneShowcase> {
             bottom: 100.0,
             left: 0,
             right: 0,
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: Text(
-                !_showStartButton ? _animatedText : '',
-                key: ValueKey<int>(_currentIndex), // Change key to _currentIndex for the text animation restart
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 24),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 1000),
+                child: Text(
+                  !_showStartButton ? _animatedText : '',
+                  key: ValueKey<int>(_currentIndex), // Change key to _currentIndex for the text animation restart
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 24),
+                ),
               ),
             ),
           ),

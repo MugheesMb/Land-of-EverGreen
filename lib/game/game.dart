@@ -13,9 +13,23 @@ import 'package:gitlab_hero/routes/settings.dart';
 
 import '../hud/game_data.dart';
 
+import 'dart:async';
+
+import 'package:flame_audio/flame_audio.dart';
+
+import 'bottle.dart';
+
+
 
 
 class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
+
+
+  static const coinT = 'coin.wav';
+  static const ecoT = 'eco.wav';
+  static const enemyT = 'enemy.wav';
+  static const jumpT = 'jump.wav';
+  static const plasticT = 'plastic.wav';
 
 
   final  musicValueNotifier = ValueNotifier(true);
@@ -30,6 +44,7 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
     )),
     LevelSelection.id: OverlayRoute((context,game) =>  LevelSelection(
       onLevelSelected: startLevel,
+      onBackPressed: popRoute,
 
     )),
     Settings.id: OverlayRoute((context,game) => Settings(
@@ -52,6 +67,9 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
   @override
   Future<void> onLoad() async {
 
+
+
+    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
     bu = await Sprite.load('enemy.png');
     await add(router);
   }
@@ -83,6 +101,9 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
       router.pushNamed(PauseMenu.id);
       pauseEngine();
   }
-
+  void LelCom(){
+    router.pushNamed(LevComplete.id);
+    pauseEngine();
+  }
 
 }

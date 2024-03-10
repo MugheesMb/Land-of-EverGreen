@@ -2,7 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flame/collisions.dart';
 import 'package:flame/input.dart'; // Import for keyboard input
-
+import 'dart:async' as async;
 import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
@@ -16,8 +16,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/sprite.dart';
 import 'package:gitlab_hero/game/bottle.dart';
+import 'package:gitlab_hero/game/eco.dart';
 import 'package:gitlab_hero/game/enemy.dart';
 import 'package:gitlab_hero/game/game.dart';
+import 'package:gitlab_hero/game/gamend.dart';
 import 'package:gitlab_hero/game/gound.dart';
 import 'package:gitlab_hero/game/plate.dart';
 import 'package:gitlab_hero/game/shopper.dart';
@@ -25,15 +27,24 @@ import '../game/Player.dart';
 import '../game/bullet.dart';
 import '../game/gem.dart';
 import 'package:flame/experimental.dart';
-
+import 'package:flame/effects.dart';
 import '../game/grounf2.dart';
 import '../hud/game_data.dart';
 import '../hud/hud.dart';
+import 'package:flame_audio/flame_audio.dart';
 
+import 'package:flutter/widgets.dart';
 
 
 
 class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame>{
+
+  static const coinT = 'coin.wav';
+  static const ecoT = 'eco.wav';
+  static const enemyT = 'enemy.wav';
+  static const jumpT = 'jump.wav';
+  static const plasticT = 'plastic.wav';
+
   GamePlay(this.currentLevel,  {super.key, this.onPausePressed} );
   static const id  = 'GamePlay';
 
@@ -43,6 +54,14 @@ class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame
   late Sprite _sprite;
   late Player _player;
   late final CameraComponent camera;
+  late final _camShake = MoveEffect.by(
+    Vector2(3, 0),
+    InfiniteEffectController(ZigzagEffectController(period: 0.2)),
+  );
+  late final _camShake2 = MoveEffect.by(
+    Vector2(15, 10),
+    InfiniteEffectController(ZigzagEffectController(period: 0.2)),
+  );
 
 
 
@@ -50,7 +69,7 @@ class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame
   final hud = Hud();
   @override
   Future<void> onLoad() async {
-
+    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
 print('current: $currentLevel' );
       final map = await TiledComponent.load('mb3.tmx', Vector2.all(16));
 
@@ -64,10 +83,12 @@ print('current: $currentLevel' );
     await add(camera);
 
     game.plData.health.value = 5;
+    game.plData.score.value = 0;
+    game.plData.plastic.value = 0;
 //camera.follow(player);
     camera.moveTo(camera.viewport.virtualSize * 0.5);
     await camera.viewport.addAll([hud]);
-
+    await camera.viewfinder.add(_camShake);
 
 
 final ground = map.tileMap.getLayer<ObjectGroup>('Ground');
@@ -76,6 +97,7 @@ for (final gemm in ground!.objects) {
 
   switch(gemm.class_){
     case 'ground':
+
       final gro = Platform(
         position: Vector2(gemm.x * 0.5, gemm.y * 0.5),
         size: Vector2( gemm.width, gemm.height),
@@ -163,16 +185,38 @@ if(objects != null) {
             ),
           ],
 
-        )..debugMode = true;
+        );
+          //..debugMode = true;
         await world.add(_player);
         break;
       case 'coins':
         var gim =  Gem()
-          ..sprite = await Sprite.load('t2.png')
+          ..sprite = await Sprite.load('star.png')
           ..position = position
           ..size = size
           ..anchor = Anchor.centerRight;
         await world.add(gim);
+        break;
+      case 'end':
+        var gim2 =  GemEnd()
+          ..sprite = await Sprite.load('fs.png')
+          ..position = position
+          ..size = size
+          ..anchor = Anchor.centerRight;
+        await world.add(gim2);
+        break;
+      case 'diamond':
+        var dia =  Eco(
+          onPlayerCollision: () {
+            // Implement or call the camera shake function here
+            // For example: gameRef.shakeCamera();
+            triggerCameraShake2();
+          },
+          position: position ,
+         size: size,
+         // targetPosition: Vector2(target!.x * 0.5, target!.y * 0.5),
+        );
+        await world.add(dia);
         break;
       case 'enemy':
         final targetObjectId =
@@ -180,10 +224,16 @@ if(objects != null) {
         final target = spawnPointLayer?.objects
             .firstWhere((object) => object.id == targetObjectId);
         final enemy = Enemy(
+          onPlayerCollision: () {
+            // Implement or call the camera shake function here
+            // For example: gameRef.shakeCamera();
+            triggerCameraShake();
+          },
           position: position ,
           targetPosition: Vector2(target!.x * 0.5, target!.y * 0.5),
 
-        )..debugMode = true;
+        );
+        //..debugMode = true;
         await world.add(enemy);
     break;
   }
@@ -191,22 +241,45 @@ if(objects != null) {
 
   _setupCamera(map);
 }
-    Bullet bullet = Bullet(
+
+  /*  Bullet bullet = Bullet(
       sprite:  game.bu,
       size: Vector2(54, 54),
-      position: this._player.position.clone(),
+      position: this._player.position.clone() * 0.3,
     );
     bullet.anchor = Anchor.center;
-    world.add(bullet);
+    await map.add(bullet);*/
 
 
 
     return super.onLoad();
 
   }
+  void triggerCameraShake() {
+    // Ensure the effect is reset and ready to run again
+    _camShake.reset();
 
+    camera.viewfinder.add(_camShake);
+    async.Timer(const Duration(seconds: 1), () {
+      // Stop the shake effect
+      _camShake.removeFromParent();
+    });
+    //_camShake.onStart();
+  }
+  void triggerCameraShake2() {
+    // Ensure the effect is reset and ready to run again
+    _camShake2.reset();
+
+    camera.viewfinder.add(_camShake2);
+    async.Timer(const Duration(seconds: 3), () {
+      // Stop the shake effect
+      _camShake2.removeFromParent();
+    });
+    //_camShake.onStart();
+  }
 
 void _setupCamera(TiledComponent level) {
+
     camera.follow(_player, maxSpeed: 250);
    camera.setBounds(
       Rectangle.fromLTRB(
