@@ -2,10 +2,10 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 // Represents a trail in the game world with a polygon hitbox.
-class Trail extends PositionComponent with CollisionCallbacks {
+class TrailPoly extends PositionComponent with CollisionCallbacks {
   final List<Vector2> vertices;
 
-  Trail({
+  TrailPoly({
     required this.vertices,
     Vector2? position,
     Vector2? size,

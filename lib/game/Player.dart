@@ -6,15 +6,22 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flutter/services.dart';
-import 'package:ever_green/game/gem.dart';
-import 'package:ever_green/game/gound.dart';
-import 'dart:math' as math;
+import 'package:gitlab_hero/game/game.dart';
+import 'package:gitlab_hero/game/gem.dart';
+import 'package:gitlab_hero/game/gound.dart';
+import 'dart:math' as Math;
+
+import 'package:gitlab_hero/game/grounf2.dart';
+
+import 'bullet.dart';
 
 
-class Player extends SpriteAnimationComponent with HasGameRef , CollisionCallbacks, KeyboardHandler {
+
+class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , CollisionCallbacks, KeyboardHandler {
   Player({super.position,super.size ,  Iterable<Component>? children,}): super(
     children: children,
   );
+
 
   int _hAxisInput = 0;
   bool _isOnGround = false;
@@ -25,40 +32,58 @@ class Player extends SpriteAnimationComponent with HasGameRef , CollisionCallbac
   bool _jumpInput = false;
   final Vector2 _velocity = Vector2.zero();
   int _nHitboxesInContact = 0;
-
-
+  SpriteAnimation? _walkingAnimation;
+  SpriteAnimation? _idleAnimation;
+  SpriteAnimation? _jumpAnimation;
+  double startY = 0; // Y-coordinate when the jump starts
+  bool hasJumped = false;
   @override
   Future<void> onLoad() async {
-
-
-
-
-    animation = await game.loadSpriteAnimation(
-      'mb1.png',
+    _walkingAnimation = await game.loadSpriteAnimation(
+      'her2.png',
       SpriteAnimationData.sequenced(
-        amount: 5,
+        amount: 7, // Adjust based on your sprite sheet
         stepTime: 0.1,
-        textureSize: Vector2(750, 900),
-
+        textureSize: Vector2(750, 422),
       ),
-
     );
+
+    _idleAnimation = await game.loadSpriteAnimation(
+      'her3.png', // Adjust with your idle sprite sheet
+      SpriteAnimationData.sequenced(
+        amount: 1, // Adjust based on your sprite sheet
+        stepTime: 0.1,
+        textureSize: Vector2(750, 422),
+      ),
+    );
+    _jumpAnimation = await game.loadSpriteAnimation(
+      'new.png', // Adjust with your idle sprite sheet
+      SpriteAnimationData.sequenced(
+        amount: 1, // Adjust based on your sprite sheet
+        stepTime: 0.1,
+        textureSize: Vector2(750, 422),
+      ),
+    );
+
     ///position = game.size * 0.5;
-    size = Vector2(100, 120);
+    animation = _idleAnimation;
+    size = Vector2(95, 95);
     anchor = Anchor.bottomCenter;
    // final double radius = size.minDimension / 2;
-    await add(CircleHitbox());
-  /*  final Vector2 op = Vector2(70, 110);
-    await add(RectangleHitbox(size: op));*/
+    await add(CircleHitbox.relative(1, parentSize: Vector2(95, 95)));
+
+
   }
+
+
 
   @override
   void update(double dt) {
     // Apply horizontal movement based on input.
-    if (_nHitboxesInContact == 0 && _isOnGround && _velocity.y == 0) {
+    if (_nHitboxesInContact == 0 && _isOnGround &&  _velocity.y == 0) {
       _isOnGround = false;
     }
-    _velocity.x = _hAxisInput * _movespeed;
+   _velocity.x = _hAxisInput * _movespeed;
 
     // Apply gravity continuously. If the player is on the ground, we shouldn't add gravity.
     if (!_isOnGround) {
@@ -83,6 +108,51 @@ class Player extends SpriteAnimationComponent with HasGameRef , CollisionCallbac
     position += _velocity * dt;
 
 
+    bool isInAir = !_isOnGround;
+
+    // Check for the start of a jump
+    if (!_isOnGround && !hasJumped) {
+      startY = position.y; // Record the starting Y-coordinate of the jump
+      hasJumped = true; // Mark that the jump has started
+    }
+    // Update the animation based on the player's state and elevation
+    if (isInAir) {
+      // Check if the player has moved at least 2 cm (20 units) above the start Y-coordinate
+      if (hasJumped && (startY - position.y) >= 20) {
+        // If yes, trigger the jump animation
+        if (animation != _idleAnimation) {
+          animation = _idleAnimation;
+        }
+      }
+     /* else if (animation != _idleAnimation) {
+        // Use the idle animation for smaller elevations
+        animation = _idleAnimation;
+      }*/
+    } else {
+      // Determine if the player is idle or walking when on the ground
+      bool isIdle = _hAxisInput == 0;
+      if (isIdle) {
+        // Player is idle on the ground
+        if (animation != _idleAnimation) {
+          animation = _idleAnimation;
+        }
+      } else {
+        // Player is walking on the ground
+        if (animation != _walkingAnimation) {
+          animation = _walkingAnimation;
+        }
+      }
+    }
+
+    // Reset the jump flag and startY when the player lands back on the ground
+    if (_isOnGround && hasJumped) {
+      hasJumped = false;
+      startY = 0;
+    }
+
+
+
+
     // Handle player orientation based on movement direction.
     if (_hAxisInput < 0 && scale.x > 0) {
       flipHorizontallyAroundCenter();
@@ -101,16 +171,32 @@ class Player extends SpriteAnimationComponent with HasGameRef , CollisionCallbac
     _hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;
     _hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyD) ? 1 : 0;
     _jumpInput = keysPressed.contains(LogicalKeyboardKey.space);
+    // Add shooting handling
+    if (keysPressed.contains(LogicalKeyboardKey.keyF)) {
+      shoot();
+    }
 
     return true;
   }
+
+  void shoot() {
+    Bullet bullet = Bullet(
+      sprite: game.bu,
+      size: Vector2(64, 64),
+      position: position.clone(),
+    );
+
+    // Anchor it to center and add to game world.
+    bullet.anchor = Anchor.center;
+    gameRef.add(bullet);
+  }
+
+
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is Gem) {
-      other.removeAppearance();
-    }
 
-    if (other is Platform) {
+
+    if (other is Platform || other is TrailPoly) {
       if (intersectionPoints.length == 2) {
         // Calculate the collision normal and separation distance.
         final mid = (intersectionPoints.elementAt(0) +
@@ -143,4 +229,20 @@ class Player extends SpriteAnimationComponent with HasGameRef , CollisionCallbac
     super.onCollisionEnd(other);
     --_nHitboxesInContact;
   }
+  void hit() {
+    add(
+      OpacityEffect.fadeOut(
+        EffectController(
+          alternate: true,
+          duration: 0.1,
+          repeatCount: 5,
+        ),
+      ),
+    );
   }
+
+  void jump() {
+    _jumpInput = true;
+    _isOnGround = true;
+  }
+}
