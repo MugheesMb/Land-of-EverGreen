@@ -87,7 +87,7 @@ flutter:
   fonts:
     - family: rexlia
       fonts:
-        - asset: assets/rexlia.tff
+        - asset: assets/font/rexlia.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
