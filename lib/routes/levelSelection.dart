@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
 class LevelSelection extends StatelessWidget {
@@ -16,40 +17,94 @@ class LevelSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Level Selection',
-              style: TextStyle(fontSize: 30),
-            ),
-            const SizedBox(height: 15),
-            Flexible(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount:  3,
-                  mainAxisExtent: 50,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                ),
-                itemBuilder: (context, index) {
-                  return OutlinedButton(
-                    onPressed: () => onLevelSelected?.call(index + 1),
-                    child: Text('Level ${index + 1}'),
-                  );
-                },
-                itemCount: 6,
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 100),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.blue,
+      //   leading: IconButton(
+      //           color: Colors.white, 
+      //           onPressed: onBackPressed,
+      //           icon: const Icon(Icons.arrow_back_rounded),
+      //         ),
+      // ),
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Colors.black
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              
+              const Text(
+                'Select Level',
+                style: TextStyle(fontSize: 30, color: Colors.white),
               ),
-            ),
-            const SizedBox(height: 5),
-            IconButton(
-              onPressed: onBackPressed,
-              icon: const Icon(Icons.arrow_back_rounded),
-            )
-          ],
+              const SizedBox(height: 15),
+              Flexible(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount:  3,
+                    mainAxisExtent: 150,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () => onLevelSelected?.call(index + 1),
+                      child: Stack(
+                        children: [
+                          
+                          Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              width:100,
+                              decoration:const  BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.all(Radius.circular(15))
+                              ),
+                              child: Center(child: Text('Level ${index + 1}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),))),
+                              RatingBar.builder(
+                           initialRating: 3,
+                           direction: Axis.horizontal,
+                           allowHalfRating: true,
+                           itemCount: 3,
+                           itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                           itemBuilder: (context, _) => const Icon(
+                             Icons.star,
+                             size: 15,
+                             color: Colors.grey,
+                           ),
+                           onRatingUpdate: (rating) {
+                             print(rating);
+                           },
+                        ),
+                          ],
+                        ),
+                        index != 0?
+                        SizedBox(
+                          height: 50,
+                          width: 50,
+                          child: Image.asset("assets/images/lock.png")):const SizedBox(),
+                        
+                        ]
+                      ),
+                    );
+                  },
+                  itemCount: 6,
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 100),
+                ),
+              ),
+              const SizedBox(height: 5),
+              CircleAvatar(
+                child: IconButton(
+                  onPressed: onBackPressed,
+                  icon:const Icon(Icons.arrow_back, color: Colors.black)
+                ),
+              ),
+              
+            ],
+          ),
         ),
       ),
     );
