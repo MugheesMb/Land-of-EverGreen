@@ -146,6 +146,24 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "firebase_core",
+      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.24.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_core_platform_interface",
+      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_platform_interface-5.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_core_web",
+      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "fixnum",
       "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.0",
       "packageUri": "lib/",
@@ -518,7 +536,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-03-11T13:18:25.241035Z",
+  "generated": "2024-03-11T13:37:14.049914Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

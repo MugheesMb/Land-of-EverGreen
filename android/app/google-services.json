@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "138371306067",
+    "project_id": "land-of-evergreen",
+    "storage_bucket": "land-of-evergreen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138371306067:android:bd9d603bc7820243e0eca6",
+        "android_client_info": {
+          "package_name": "com.example.ever_green"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb-_Q9szzRbd9-U20bL46a_WkPUy4Ff74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

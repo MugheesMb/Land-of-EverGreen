@@ -46,6 +46,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   dart_jsonwebtoken: ^2.13.0
   flame_audio: ^2.10.0
+  firebase_core: ^2.24.2
 
 dev_dependencies:
   flutter_test:
@@ -85,7 +86,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: rexlia
+    - family: Rexlia
       fonts:
         - asset: assets/font/rexlia.ttf
   #       - asset: fonts/Schyler-Italic.ttf
