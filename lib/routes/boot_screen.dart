@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
+import '../loading.dart';
 import '../utils/constants.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _BootScreenState extends State<BootScreen> {
                 ],
               ),
               secondChild: widget.isLoading
-                  ? CircularProgressIndicator() // Show
+                  ? LoadingScreen() // Show
                   :  TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
