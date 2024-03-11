@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:flame/flame.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/input.dart'; // Import for keyboard input
 import 'dart:async' as async;
@@ -191,7 +192,7 @@ if(objects != null) {
         break;
       case 'coins':
         var gim =  Gem()
-          ..sprite = await Sprite.load('star.png')
+          ..sprite = await Sprite(Flame.images.fromCache('star.png'))
           ..position = position
           ..size = size
           ..anchor = Anchor.centerRight;
@@ -199,7 +200,7 @@ if(objects != null) {
         break;
       case 'end':
         var gim2 =  GemEnd()
-          ..sprite = await Sprite.load('fs.png')
+          ..sprite = await Sprite(Flame.images.fromCache('fs.png'))
           ..position = position
           ..size = size
           ..anchor = Anchor.centerRight;
@@ -297,7 +298,7 @@ void _setupCamera(TiledComponent level) {
 
 
   @override
-  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+  bool onKeyEvent(event, Set<LogicalKeyboardKey> keysPressed) {
     if(keysPressed.contains(LogicalKeyboardKey.keyP)) {
       onPausePressed?.call();
     }

@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
-
+import 'package:flame/flame.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/cupertino.dart' hide Viewport;
@@ -30,10 +30,10 @@ class Hud extends Component with  HasGameReference<MyGame> , ParentIsA<Viewport>
   @override
   Future<void> onLoad() async {
 
-    final _spriteImage = await Sprite.load('play.png');
-    final _spriteImage2 = await Sprite.load('star.png');
-    final _spriteImage3 = await Sprite.load('bin.png');
-    final _spriteImage4 = await Sprite.load('head.png');
+    final _spriteImage = await Sprite(Flame.images.fromCache('play.png'));
+    final _spriteImage2 = await Sprite(Flame.images.fromCache('star.png'));
+    final _spriteImage3 = await Sprite(Flame.images.fromCache('bin.png'));
+    final _spriteImage4 = await Sprite(Flame.images.fromCache('head.png'));
     healthTextComponent = TextComponent(
       text: 'x5',
       textRenderer: TextPaint(style: TextStyle(

@@ -29,7 +29,7 @@ class MainMenu extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 50.0),
                     child: Text(
-                      'Land of EverGreen',
+                      'to be decided',
                       style: TextStyle(
                         fontSize: 50.0,
                         color: Colors.black,

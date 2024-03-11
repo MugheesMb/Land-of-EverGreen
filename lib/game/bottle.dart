@@ -6,6 +6,7 @@ import 'package:tiled/tiled.dart';
 import 'package:flutter/animation.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'game.dart';
+import 'package:flame/flame.dart';
 
 
 class Bottle extends SpriteAnimationComponent with  HasGameReference<MyGame> , CollisionCallbacks {
@@ -16,14 +17,25 @@ class Bottle extends SpriteAnimationComponent with  HasGameReference<MyGame> , C
 
   @override
   Future<void> onLoad() async {
+  /*  final image = await Flame.images.fromCache('cup.png');
+
     animation = await game.loadSpriteAnimation(
-      'cup.png',
+      image as String,
       SpriteAnimationData.sequenced(
         amount: 1,
         stepTime: 0.1,
         textureSize: Vector2(500, 500),
       ),
 
+    );*/
+
+    animation = await SpriteAnimation.fromFrameData(
+      Flame.images.fromCache('cup.png'),
+      SpriteAnimationData.sequenced(
+        amount: 1,
+        textureSize: Vector2(500, 500),
+        stepTime: 0.1,
+      ),
     );
 
     ///position = game.size * 0.5;

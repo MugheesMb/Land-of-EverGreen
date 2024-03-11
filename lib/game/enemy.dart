@@ -9,7 +9,7 @@ import 'package:ever_green/game/Player.dart';
 import 'package:flame_audio/flame_audio.dart';
 import '../routes/GamePlay.dart';
 import 'game.dart';
-
+import 'package:flame/flame.dart';
 
 class Enemy extends SpriteAnimationComponent with  HasGameReference<MyGame> , CollisionCallbacks {
 
@@ -47,26 +47,25 @@ class Enemy extends SpriteAnimationComponent with  HasGameReference<MyGame> , Co
 
   @override
   Future<void> onLoad() async {
-    animation = await game.loadSpriteAnimation(
-   /*   'enee.png',
-      SpriteAnimationData.sequenced(
-        amount: 3,
-        stepTime: 0.1,
-        textureSize: Vector2(400, 299),
-      ),*/
+   /* animation = await game.loadSpriteAnimation(
+
       'men2.png',
       SpriteAnimationData.sequenced(
         amount: 9,
         stepTime: 0.1,
         textureSize: Vector2(426, 240),
       ),
-
-
-
+    );*/
+    animation = await SpriteAnimation.fromFrameData(
+      Flame.images.fromCache('men2.png'),
+      SpriteAnimationData.sequenced(
+        amount: 9,
+        textureSize: Vector2(426, 240),
+        stepTime: 0.1,
+      ),
     );
-
     ///position = game.size * 0.5;
-    size = Vector2(80, 70);
+    size = Vector2(50, 60);
     anchor = Anchor.bottomCenter;
     // final double radius = size.minDimension / 2;
     await add(CircleHitbox.relative(0.9, parentSize: size,)..collisionType = CollisionType.passive);
