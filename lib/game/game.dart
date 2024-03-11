@@ -1,3 +1,4 @@
+import 'package:ever_green/routes/trash_screen.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
@@ -75,7 +76,10 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
     )),
     RetryMenu.id: OverlayRoute((context,game) => RetryMenu(
       gameRef: this,
-    ))
+    )),
+    TrashScreen.id: OverlayRoute((context,game) => TrashScreen(
+      gameRef:this,
+    )),
   };
 
   late final router = RouterComponent(initialRoute: MainMenu.id, routes: _routes,);

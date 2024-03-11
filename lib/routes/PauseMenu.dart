@@ -23,6 +23,7 @@ class PauseMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(210, 229, 238, 238),
       body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +47,7 @@ class PauseMenu extends StatelessWidget {
                   child: const Text('Virtual JoyStick'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               SizedBox(
@@ -59,11 +60,11 @@ class PauseMenu extends StatelessWidget {
                     gameRef.popRoute();
                     //   gameRef.overlays.add(PauseButton.ID);
                   },
-                  child: Text('Resume')
+                  child: const Text('Resume')
                   ,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               SizedBox(
@@ -79,10 +80,10 @@ class PauseMenu extends StatelessWidget {
                       gameRef.resumeEngine();
                     }
                   },
-                  child: Text('Restart'),
+                  child: const Text('Restart'),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               SizedBox(
@@ -96,7 +97,7 @@ class PauseMenu extends StatelessWidget {
 
                     gameRef.router.pushReplacementNamed(MainMenu.id);
                   },
-                  child: Text('Exit'),
+                  child: const Text('Exit'),
                 ),
               ),
             ],

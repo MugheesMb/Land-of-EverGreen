@@ -22,10 +22,12 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     children: children,
   );
 
-
-  int _hAxisInput = 0;
+  bool actionInitiated = false;
+  bool _firstJump = true;
+  int hAxisInput = 0;
   bool _isOnGround = false;
   final double _movespeed = 200;
+  final double _gravityy = 20;
   final double _gravity = 10;
   final double _jumpSpeed = 320;
   final Vector2 _up = Vector2(0, -1);
@@ -73,7 +75,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     animation = _idleAnimation;
     size = Vector2(95, 95);
     anchor = Anchor.bottomCenter;
-   // final double radius = size.minDimension / 2;
+    // final double radius = size.minDimension / 2;
     await add(CircleHitbox.relative(1, parentSize: Vector2(95, 95)));
 
 
@@ -89,17 +91,18 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     if (_nHitboxesInContact == 0 && _isOnGround &&  _velocity.y == 0) {
       _isOnGround = false;
     }
-   _velocity.x = _hAxisInput * _movespeed;
+    _velocity.x = hAxisInput * _movespeed;
 
     // Apply gravity continuously. If the player is on the ground, we shouldn't add gravity.
-    if (!_isOnGround) {
-      // Apply gravity
-      _velocity.y += _gravity;
-    } else if (!_jumpInput) {
-      // Ensure the player doesn't keep sinking or floating if they are on the ground and not jumping
-      _velocity.y = 0;
+    if (actionInitiated) {
+      if (!_isOnGround) {
+        // Apply gravity
+        _velocity.y +=  _firstJump ? _gravityy : _gravity;
+      } else if (!_jumpInput) {
+        // Ensure the player doesn't keep sinking or floating if they are on the ground and not jumping
+        _velocity.y = 0;
+      }
     }
-
     // Handle jumping logic - only jump if on the ground.
     if (_jumpInput && _isOnGround) {
 
@@ -111,11 +114,15 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
       _velocity.y = -_jumpSpeed; // Apply jump velocity upwards.
       _isOnGround = false; // Player leaves the ground.
       _jumpInput = false; // Reset jump input to prevent repeated jumps.
+
+      if (_firstJump) {
+        _firstJump = false; // Mark that the first jump has occurred
+      }
     }
 
 
     // Clamp vertical velocity to avoid exceeding jump speed or falling too fast.
-    _velocity.y = _velocity.y.clamp(-_jumpSpeed, _gravity * 30);
+    _velocity.y = _velocity.y.clamp(-_jumpSpeed, _gravity * 20);
 
     // Update the player's position based on the velocity.
     position += _velocity * dt;
@@ -137,13 +144,13 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
           animation = _idleAnimation;
         }
       }
-     /* else if (animation != _idleAnimation) {
+      /* else if (animation != _idleAnimation) {
         // Use the idle animation for smaller elevations
         animation = _idleAnimation;
       }*/
     } else {
       // Determine if the player is idle or walking when on the ground
-      bool isIdle = _hAxisInput == 0;
+      bool isIdle = hAxisInput == 0;
       if (isIdle) {
         // Player is idle on the ground
         if (animation != _idleAnimation) {
@@ -167,9 +174,9 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
 
     // Handle player orientation based on movement direction.
-    if (_hAxisInput < 0 && scale.x > 0) {
+    if (hAxisInput < 0 && scale.x > 0) {
       flipHorizontallyAroundCenter();
-    } else if (_hAxisInput > 0 && scale.x < 0) {
+    } else if (hAxisInput > 0 && scale.x < 0) {
       flipHorizontallyAroundCenter();
     }
 
@@ -179,20 +186,25 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
   @override
   bool onKeyEvent(event, Set<LogicalKeyboardKey> keysPressed) {
-    _hAxisInput = 0;
+    int previousHAxisInput = hAxisInput;
 
-    _hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;
-    _hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyD) ? 1 : 0;
+    hAxisInput = 0;
+
+    hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;
+    hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyD) ? 1 : 0;
     _jumpInput = keysPressed.contains(LogicalKeyboardKey.space);
+    if (hAxisInput != 0 && hAxisInput != previousHAxisInput) {
+      actionInitiated = true;
+    }
     // Add shooting handling
-   /* if (keysPressed.contains(LogicalKeyboardKey.keyF)) {
+    /* if (keysPressed.contains(LogicalKeyboardKey.keyF)) {
       shoot();
     }*/
 
     return true;
   }
 
- /* void shoot() {
+  /* void shoot() {
     Bullet bullet = Bullet(
       sprite: game.bu,
       size: Vector2(64, 64),

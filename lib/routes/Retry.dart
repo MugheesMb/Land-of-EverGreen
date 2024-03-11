@@ -15,62 +15,84 @@ class RetryMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50.0),
-              child: Text(
-                'GameOver',
-                style: TextStyle(
-                  fontSize: 50.0,
-                  //  fontFamily: 'BungeeInline',
-                  color: Colors.black,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 20.0,
-                      color: Colors.white,
-                      offset: Offset(0, 0),
-                    )
-                  ],
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(210, 229, 238, 238),
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 50.0),
+                child: Text(
+                  'GameOver',
+                  style: TextStyle(
+                    fontSize: 50.0,
+                    //  fontFamily: 'BungeeInline',
+                    color: Colors.black,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 20.0,
+                        color: Colors.white,
+                        offset: Offset(0, 0),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 3,
-              child: ElevatedButton(
-                onPressed: () {
-                  // gameRef.overlays.remove(PauseMenu.id);
-                  // gameRef.overlays.add(PauseButton.ID);
-                  // gameRef.reset();
-                  var gameplay = gameRef.findByKeyName<GamePlay>(GamePlay.id);
-                  if(gameplay != null) {
-                    gameRef.startLevel(gameplay.currentLevel);
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 3,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // gameRef.overlays.remove(PauseMenu.id);
+                    // gameRef.overlays.add(PauseButton.ID);
+                    // gameRef.reset();
+                    var gameplay = gameRef.findByKeyName<GamePlay>(GamePlay.id);
+                    if(gameplay != null) {
+                      gameRef.startLevel(gameplay.currentLevel);
+                      gameRef.resumeEngine();
+                    }
+                  },
+                  child: const Text('Retry'),
+                ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 3,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // gameRef.overlays.remove(PauseMenu.id);
+                    // gameRef.overlays.add(PauseButton.ID);
+                    // gameRef.reset();
+                    // var gameplay = gameRef.findByKeyName<GamePlay>(GamePlay.id);
+                    // if(gameplay != null) {
+                    //   gameRef.startLevel(gameplay.currentLevel);
+                    //   gameRef.resumeEngine();
+                    //}
+                  },
+                  child: const Text('View Your Collection'),
+                ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 3,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // gameRef.overlays.remove(PauseMenu.id);
+                    // gameRef.reset();
                     gameRef.resumeEngine();
-                  }
-                },
-                child: Text('Retry'),
+                    gameRef.popRoute();
+      
+                    gameRef.router.pushReplacementNamed(MainMenu.id);
+                  },
+                  child: const Text('Exit'),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 3,
-              child: ElevatedButton(
-                onPressed: () {
-                  // gameRef.overlays.remove(PauseMenu.id);
-                  // gameRef.reset();
-                  gameRef.resumeEngine();
-                  gameRef.popRoute();
-
-                  gameRef.router.pushReplacementNamed(MainMenu.id);
-                },
-                child: Text('Exit'),
-              ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
   }
 }
