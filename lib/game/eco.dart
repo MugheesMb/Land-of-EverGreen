@@ -10,7 +10,7 @@ import 'package:ever_green/game/bottle.dart';
 import 'package:flame_audio/flame_audio.dart';
 import '../routes/GamePlay.dart';
 import 'game.dart';
-
+import 'package:flame/flame.dart';
 
 class Eco extends SpriteAnimationComponent with  HasGameReference<MyGame> , CollisionCallbacks {
 
@@ -46,7 +46,7 @@ class Eco extends SpriteAnimationComponent with  HasGameReference<MyGame> , Coll
 
   @override
   Future<void> onLoad() async {
-    animation = await game.loadSpriteAnimation(
+  /*  animation = await game.loadSpriteAnimation(
       'eco.png',
       SpriteAnimationData.sequenced(
         amount: 10,
@@ -54,6 +54,15 @@ class Eco extends SpriteAnimationComponent with  HasGameReference<MyGame> , Coll
         textureSize: Vector2(426, 240),
       ),
 
+    );*/
+
+    animation = await SpriteAnimation.fromFrameData(
+      Flame.images.fromCache('eco.png'),
+      SpriteAnimationData.sequenced(
+        amount: 10,
+        textureSize: Vector2(426, 240),
+        stepTime: 0.1,
+      ),
     );
 
     ///position = game.size * 0.5;

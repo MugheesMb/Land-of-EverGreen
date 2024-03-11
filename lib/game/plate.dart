@@ -6,7 +6,7 @@ import 'package:tiled/tiled.dart';
 import 'package:flutter/animation.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'game.dart';
-
+import 'package:flame/flame.dart';
 
 class Plate extends SpriteAnimationComponent with  HasGameReference<MyGame> , CollisionCallbacks {
   bool hasCollided = false;
@@ -14,7 +14,7 @@ class Plate extends SpriteAnimationComponent with  HasGameReference<MyGame> , Co
 
   @override
   Future<void> onLoad() async {
-    animation = await game.loadSpriteAnimation(
+   /* animation = await game.loadSpriteAnimation(
       'plt.png',
       SpriteAnimationData.sequenced(
         amount: 1,
@@ -22,6 +22,14 @@ class Plate extends SpriteAnimationComponent with  HasGameReference<MyGame> , Co
         textureSize: Vector2(50, 28),
       ),
 
+    );*/
+    animation = await SpriteAnimation.fromFrameData(
+      Flame.images.fromCache('plt.png'),
+      SpriteAnimationData.sequenced(
+        amount: 1,
+        textureSize: Vector2(50, 28),
+        stepTime: 0.1,
+      ),
     );
 
     ///position = game.size * 0.5;

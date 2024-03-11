@@ -12,7 +12,7 @@ import 'package:ever_green/game/gound.dart';
 import 'dart:math' as Math;
 import 'package:flame_audio/flame_audio.dart';
 import 'package:ever_green/game/grounf2.dart';
-
+import 'package:flame/flame.dart';
 import 'bullet.dart';
 
 
@@ -39,31 +39,35 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
   bool hasJumped = false;
   @override
   Future<void> onLoad() async {
-    _walkingAnimation = await game.loadSpriteAnimation(
-      'her2.png',
+    _walkingAnimation = await SpriteAnimation.fromFrameData(
+      Flame.images.fromCache('her2.png'),
       SpriteAnimationData.sequenced(
-        amount: 7, // Adjust based on your sprite sheet
-        stepTime: 0.1,
+        amount: 7,
         textureSize: Vector2(750, 422),
+        stepTime: 0.1,
       ),
     );
 
-    _idleAnimation = await game.loadSpriteAnimation(
-      'her3.png', // Adjust with your idle sprite sheet
+
+    _idleAnimation =  await SpriteAnimation.fromFrameData(
+      Flame.images.fromCache('her3.png'),
       SpriteAnimationData.sequenced(
-        amount: 1, // Adjust based on your sprite sheet
-        stepTime: 0.1,
+        amount: 1,
         textureSize: Vector2(750, 422),
+        stepTime: 0.1,
       ),
     );
-    _jumpAnimation = await game.loadSpriteAnimation(
-      'new.png', // Adjust with your idle sprite sheet
+
+
+    _jumpAnimation = await SpriteAnimation.fromFrameData(
+      Flame.images.fromCache('new.png'),
       SpriteAnimationData.sequenced(
-        amount: 1, // Adjust based on your sprite sheet
-        stepTime: 0.1,
+        amount: 1,
         textureSize: Vector2(750, 422),
+        stepTime: 0.1,
       ),
     );
+
 
     ///position = game.size * 0.5;
     animation = _idleAnimation;
@@ -79,6 +83,8 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
   @override
   void update(double dt) {
+    bool isInAir = !_isOnGround;
+    print("Velocity Y: $_velocity.y, IsOnGround: $_isOnGround, JumpInput: $_jumpInput , isInnAir: $isInAir , hasJumped: $hasJumped, startY: $startY");
     // Apply horizontal movement based on input.
     if (_nHitboxesInContact == 0 && _isOnGround &&  _velocity.y == 0) {
       _isOnGround = false;
@@ -107,6 +113,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
       _jumpInput = false; // Reset jump input to prevent repeated jumps.
     }
 
+
     // Clamp vertical velocity to avoid exceeding jump speed or falling too fast.
     _velocity.y = _velocity.y.clamp(-_jumpSpeed, _gravity * 30);
 
@@ -114,7 +121,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     position += _velocity * dt;
 
 
-    bool isInAir = !_isOnGround;
+
 
     // Check for the start of a jump
     if (!_isOnGround && !hasJumped) {
@@ -171,7 +178,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
 
   @override
-  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+  bool onKeyEvent(event, Set<LogicalKeyboardKey> keysPressed) {
     _hAxisInput = 0;
 
     _hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;

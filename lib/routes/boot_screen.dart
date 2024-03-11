@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:ever_green/game/game.dart';
 
 class BootScreen extends StatefulWidget {
-  const BootScreen({super.key});
+  final bool isLoading;
+  const BootScreen({super.key, required this.isLoading});
 
   @override
   State<BootScreen> createState() => _BootScreenState();
@@ -49,8 +50,9 @@ class _BootScreenState extends State<BootScreen> {
                   ),
                 ],
               ),
-              secondChild:
-              TextButton(
+              secondChild: widget.isLoading
+                  ? CircularProgressIndicator() // Show
+                  :  TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(

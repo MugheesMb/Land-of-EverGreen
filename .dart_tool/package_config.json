@@ -135,9 +135,9 @@
     },
     {
       "name": "ffi",
-      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/ffi-2.1.0",
+      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/ffi-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "file",
@@ -183,7 +183,7 @@
     },
     {
       "name": "flame_tiled",
-      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/flame_tiled-1.18.4",
+      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/flame_tiled-1.19.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -351,9 +351,9 @@
     },
     {
       "name": "petitparser",
-      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-5.4.0",
+      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-6.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "platform",
@@ -513,9 +513,9 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.1.1",
+      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.3.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.3"
     },
     {
       "name": "xdg_directories",
@@ -525,9 +525,9 @@
     },
     {
       "name": "xml",
-      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.3.0",
+      "rootUri": "file:///C:/Users/Abdullah/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.5.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "ever_green",
@@ -536,7 +536,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-03-11T13:37:14.049914Z",
+  "generated": "2024-03-11T17:48:35.536243Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

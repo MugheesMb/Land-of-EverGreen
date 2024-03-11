@@ -6,7 +6,7 @@ import 'package:tiled/tiled.dart';
 import 'package:flutter/animation.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'game.dart';
-
+import 'package:flame/flame.dart';
 
 class Shopper extends SpriteAnimationComponent with  HasGameReference<MyGame> , CollisionCallbacks {
   bool hasCollided = false;
@@ -15,14 +15,15 @@ class Shopper extends SpriteAnimationComponent with  HasGameReference<MyGame> , 
 
   @override
   Future<void> onLoad() async {
-    animation = await game.loadSpriteAnimation(
-      'shop.png',
+
+
+    animation = await SpriteAnimation.fromFrameData(
+      Flame.images.fromCache('shop.png'),
       SpriteAnimationData.sequenced(
         amount: 1,
-        stepTime: 0.1,
         textureSize: Vector2(50, 89),
+        stepTime: 0.1,
       ),
-
     );
 
     ///position = game.size * 0.5;

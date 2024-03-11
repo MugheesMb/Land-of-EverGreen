@@ -34,8 +34,21 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
 
   final  musicValueNotifier = ValueNotifier(true);
   final  sfxValueNotifier = ValueNotifier(true);
+  final  vJoyValueNotifier = ValueNotifier(true);
   final plData = PlayData();
   late Sprite bu;
+
+
+  @override
+  Future<void> onLoad() async {
+
+
+    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
+    bu = await Sprite.load('enemy.png');
+    await add(router);
+  }
+
+
 
   late final _routes  = <String, Route> {
     MainMenu.id: OverlayRoute((context,game) => MainMenu(
@@ -55,7 +68,8 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
       gameRef: this,
     )),
     PauseMenu.id: OverlayRoute((context,game) => PauseMenu(
-      gameRef: this,
+      onVjoyValueChanged: (value) => vJoyValueNotifier.value = value,
+      gameRef: this, vjoyValueListenable:vJoyValueNotifier,
     )),
     RetryMenu.id: OverlayRoute((context,game) => RetryMenu(
       gameRef: this,
@@ -64,15 +78,7 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
 
   late final router = RouterComponent(initialRoute: MainMenu.id, routes: _routes,);
 
-  @override
-  Future<void> onLoad() async {
 
-
-
-    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
-    bu = await Sprite.load('enemy.png');
-    await add(router);
-  }
 
   void _routeById(String id) {
     router.pushNamed(id);
