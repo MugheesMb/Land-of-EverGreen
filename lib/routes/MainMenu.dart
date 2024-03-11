@@ -17,7 +17,7 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          constraints: BoxConstraints.expand(),
+          constraints: const BoxConstraints.expand(),
           decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/images/MM.gif"), fit: BoxFit.cover),
@@ -26,10 +26,10 @@ class MainMenu extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 50.0),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50.0),
                     child: Text(
-                      'to be decided',
+                      'Land of EverGreen',
                       style: TextStyle(
                         fontSize: 50.0,
                         color: Colors.black,
@@ -58,18 +58,18 @@ class MainMenu extends StatelessWidget {
                           ),
                         ));
                       },
-                      child: Text('play'),
+                      child: const Text('play'),
                     ),
                     ),
 
-                  SizedBox(
+                  const SizedBox(
                     height: 30.0,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 3,
                     child: ElevatedButton(
                       onPressed: onSettingPressed,
-                      child: Text('Settings'),
+                      child: const Text('Settings'),
                     ),
                   ),
                 ],
