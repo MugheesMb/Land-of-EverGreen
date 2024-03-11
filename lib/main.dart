@@ -127,8 +127,6 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         fontFamily: "Rexlia",
       ),
-      home: const BootScreen() ,
-
       debugShowCheckedModeBanner: false,
       home:BootScreen(isLoading: _loading),
     );

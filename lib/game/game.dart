@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide OverlayRoute, Route;
 import 'package:ever_green/game/story.dart';
@@ -42,7 +43,8 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
   @override
   Future<void> onLoad() async {
 
-
+    await Flame.device.setLandscape();
+    await Flame.device.fullScreen();
     await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
     bu = await Sprite.load('enemy.png');
     await add(router);

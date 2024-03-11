@@ -16,6 +16,7 @@ class LevelSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.blue,
@@ -26,24 +27,27 @@ class LevelSelection extends StatelessWidget {
       //         ),
       // ),
       body: Container(
+        width: size.width,
         decoration: const BoxDecoration(
           color: Colors.black
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              
-              const Text(
-                'Select Level',
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-              const SizedBox(height: 15),
-              Flexible(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            
+            const Text(
+              'Select Level',
+              style: TextStyle(fontSize: 30, color: Colors.white),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              width: size.width,
+              child: Center(
                 child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount:  3,
-                    mainAxisExtent: 150,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    //mainAxisExtent: 150,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 10,
                   ),
@@ -95,18 +99,21 @@ class LevelSelection extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 100),
                 ),
               ),
+              ),
               const SizedBox(height: 5),
               CircleAvatar(
                 child: IconButton(
                   onPressed: onBackPressed,
                   icon:const Icon(Icons.arrow_back, color: Colors.black)
                 ),
-              ),
+            ),
+            const SizedBox(height: 5),
               
             ],
           ),
-        ),
-      ),
+            ),
+            
+          
     );
   }
 }
