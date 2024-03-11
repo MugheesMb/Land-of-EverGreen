@@ -59,7 +59,7 @@ class _BootScreenState extends State<BootScreen> {
                   );
                 },
                 style: TextButton.styleFrom(
-                  primary: Colors.white, // Text color
+                  foregroundColor: Colors.white, // Text color
                 ),
                 child: const Column(
                   mainAxisSize: MainAxisSize.min, // Use Min to prevent the Row from expanding to the max

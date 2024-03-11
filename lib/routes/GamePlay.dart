@@ -297,7 +297,7 @@ void _setupCamera(TiledComponent level) {
 
 
   @override
-  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     if(keysPressed.contains(LogicalKeyboardKey.keyP)) {
       onPausePressed?.call();
     }

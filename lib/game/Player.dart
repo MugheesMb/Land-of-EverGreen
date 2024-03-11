@@ -171,7 +171,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
 
   @override
-  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     _hAxisInput = 0;
 
     _hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;
