@@ -2,20 +2,34 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart' hide OverlayRoute, Route;
-import 'package:gitlab_hero/game/story.dart';
-import 'package:gitlab_hero/routes/GamePlay.dart';
-import 'package:gitlab_hero/routes/MainMenu.dart';
-import 'package:gitlab_hero/routes/PauseMenu.dart';
-import 'package:gitlab_hero/routes/Retry.dart';
-import 'package:gitlab_hero/routes/levelSelection.dart';
-import 'package:gitlab_hero/routes/level_com.dart';
-import 'package:gitlab_hero/routes/settings.dart';
+import 'package:ever_green/game/story.dart';
+import 'package:ever_green/routes/GamePlay.dart';
+import 'package:ever_green/routes/MainMenu.dart';
+import 'package:ever_green/routes/PauseMenu.dart';
+import 'package:ever_green/routes/Retry.dart';
+import 'package:ever_green/routes/levelSelection.dart';
+import 'package:ever_green/routes/level_com.dart';
+import 'package:ever_green/routes/settings.dart';
 
 import '../hud/game_data.dart';
+
+import 'dart:async';
+
+import 'package:flame_audio/flame_audio.dart';
+
+import 'bottle.dart';
+
 
 
 
 class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
+
+
+  static const coinT = 'coin.wav';
+  static const ecoT = 'eco.wav';
+  static const enemyT = 'enemy.wav';
+  static const jumpT = 'jump.wav';
+  static const plasticT = 'plastic.wav';
 
 
   final  musicValueNotifier = ValueNotifier(true);
@@ -30,6 +44,7 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
     )),
     LevelSelection.id: OverlayRoute((context,game) =>  LevelSelection(
       onLevelSelected: startLevel,
+      onBackPressed: popRoute,
 
     )),
     Settings.id: OverlayRoute((context,game) => Settings(
@@ -52,6 +67,9 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
   @override
   Future<void> onLoad() async {
 
+
+
+    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
     bu = await Sprite.load('enemy.png');
     await add(router);
   }
@@ -83,6 +101,9 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
       router.pushNamed(PauseMenu.id);
       pauseEngine();
   }
-
+  void LelCom(){
+    router.pushNamed(LevComplete.id);
+    pauseEngine();
+  }
 
 }

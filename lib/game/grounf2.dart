@@ -19,9 +19,10 @@ class TrailPoly extends PositionComponent with CollisionCallbacks {
     scale: scale,
     angle: angle,
     anchor: anchor, // Default anchor
-  ) {
+  );
+  /*{
     debugMode = true; // For development and debugging
-  }
+  }*/
 
   @override
   Future<void> onLoad() async {

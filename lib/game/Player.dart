@@ -6,12 +6,12 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flutter/services.dart';
-import 'package:gitlab_hero/game/game.dart';
-import 'package:gitlab_hero/game/gem.dart';
-import 'package:gitlab_hero/game/gound.dart';
+import 'package:ever_green/game/game.dart';
+import 'package:ever_green/game/gem.dart';
+import 'package:ever_green/game/gound.dart';
 import 'dart:math' as Math;
-
-import 'package:gitlab_hero/game/grounf2.dart';
+import 'package:flame_audio/flame_audio.dart';
+import 'package:ever_green/game/grounf2.dart';
 
 import 'bullet.dart';
 
@@ -96,6 +96,12 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
     // Handle jumping logic - only jump if on the ground.
     if (_jumpInput && _isOnGround) {
+
+      if(game.sfxValueNotifier.value){
+        FlameAudio.play(MyGame.jumpT);
+      }
+
+
       _velocity.y = -_jumpSpeed; // Apply jump velocity upwards.
       _isOnGround = false; // Player leaves the ground.
       _jumpInput = false; // Reset jump input to prevent repeated jumps.
@@ -172,24 +178,24 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     _hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyD) ? 1 : 0;
     _jumpInput = keysPressed.contains(LogicalKeyboardKey.space);
     // Add shooting handling
-    if (keysPressed.contains(LogicalKeyboardKey.keyF)) {
+   /* if (keysPressed.contains(LogicalKeyboardKey.keyF)) {
       shoot();
-    }
+    }*/
 
     return true;
   }
 
-  void shoot() {
+ /* void shoot() {
     Bullet bullet = Bullet(
       sprite: game.bu,
       size: Vector2(64, 64),
-      position: position.clone(),
+      position: position.clone() * 0.3,
     );
 
     // Anchor it to center and add to game world.
     bullet.anchor = Anchor.center;
     gameRef.add(bullet);
-  }
+  }*/
 
 
   @override

@@ -4,7 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import '../utils/constants.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:gitlab_hero/game/game.dart';
+import 'package:ever_green/game/game.dart';
 
 class BootScreen extends StatefulWidget {
   const BootScreen({super.key});
@@ -34,7 +34,7 @@ class _BootScreenState extends State<BootScreen> {
                   AnimatedTextKit(
                     animatedTexts: [
                       RotateAnimatedText(
-                        'A game by Team Mugy',
+                        'A Game by Team Mugy',
                         textStyle: TextStyles.buttonSmall,
                       ),
                       RotateAnimatedText(
@@ -49,7 +49,8 @@ class _BootScreenState extends State<BootScreen> {
                   ),
                 ],
               ),
-              secondChild: IconButton(
+              secondChild:
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
@@ -57,11 +58,32 @@ class _BootScreenState extends State<BootScreen> {
                     ),
                   );
                 },
-                icon: const Icon(
-                  Icons.arrow_forward_rounded,
-                  color: Colors.black,
+                style: TextButton.styleFrom(
+                  primary: Colors.white, // Text color
+                ),
+                child: const Column(
+                  mainAxisSize: MainAxisSize.min, // Use Min to prevent the Row from expanding to the max
+                  children: <Widget>[
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: Colors.white,
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0), // Add some spacing between icon and text
+                      child: Text(
+                        'Start the Engine', // The text you want to display
+                        style: TextStyle(
+                          color: Colors.white, // Text color
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+
+
+
             );
           },
         ),
