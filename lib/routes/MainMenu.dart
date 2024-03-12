@@ -18,33 +18,43 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black.withOpacity(0.5),
         body: Container(
           constraints: const BoxConstraints.expand(),
           decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/images/MM.gif"), fit: BoxFit.cover),
+                
           ),
           child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 50.0),
-                    child: Text(
-                      'Land of EverGreen',
-                      style: TextStyle(
-                        fontSize: 50.0,
-                        color: Colors.black,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 20.0,
-                            color: Colors.white,
-                            offset: Offset(0, 0),
-                          )
-                        ],
+                  Container(
+                    
+                    decoration: BoxDecoration(
+                     color: Colors.black.withOpacity(0.2),
+                     borderRadius: BorderRadius.circular(15) 
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 10),
+                      child: Text(
+                        'Land of EverGreen',
+                        style: TextStyle(
+                          fontSize: 50.0,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 20.0,
+                              color: Colors.white,
+                              offset: Offset(0, 0),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
+                  const SizedBox(height:20),
                   InkWell(
                     onTap: (){
                           // Navigate to the SceneShowcase widget

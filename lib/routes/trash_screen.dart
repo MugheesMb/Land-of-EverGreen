@@ -129,19 +129,19 @@ class TrashScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5),
-            // SizedBox(
-            //   width: 200,
-            //   child: InkWell(
-            //     onTap:(){
-            //       Navigator.of(context).pop();
-            //       // gameRef.resumeEngine();
-            //       // gameRef.popRoute();
+            SizedBox(
+              width: 200,
+              child: InkWell(
+                onTap:(){
+                  //Navigator.of(context).pop();
+                  gameRef.resumeEngine();
+                  gameRef.popRoute();
 
-            //       // gameRef.router.pushReplacementNamed(MainMenu.id);
-            //     },
-            //     child: Image.asset("assets/images/exit.png"),
-            //   ),
-            // ),
+                  gameRef.router.pushReplacementNamed(MainMenu.id);
+                },
+                child: Image.asset("assets/images/exit.png"),
+              ),
+            ),
               ],
             ),
           ),
