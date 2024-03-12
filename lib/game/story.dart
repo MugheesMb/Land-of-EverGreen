@@ -38,11 +38,11 @@ class _SceneShowcaseState extends State<SceneShowcase> {
   @override
   void initState() {
     super.initState();
-    if(widget.gameRef.musicValueNotifier.value) {
-      FlameAudio.loopLongAudio(MyGame.storyM, volume: 0.6).then((audioPlayer) {
-        _bgMusic = audioPlayer;
-      });
-    }
+    // if(widget.gameRef.musicValueNotifier.value) {
+    //   FlameAudio.loopLongAudio(MyGame.storyM, volume: 0.6).then((audioPlayer) {
+    //     _bgMusic = audioPlayer;
+    //   });
+    // }
     _startSceneShowcase();
     _animateText(_texts[_currentIndex]);
   }
@@ -80,7 +80,7 @@ class _SceneShowcaseState extends State<SceneShowcase> {
 
   @override
   void dispose() {
-    _bgMusic?.dispose();
+    //_bgMusic?.dispose();
     _timer?.cancel();
 
     _textAnimationTimer?.cancel();
