@@ -61,7 +61,7 @@ class Bottle extends SpriteAnimationComponent with  HasGameReference<MyGame> , C
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
     if (other is Player && !hasCollided) {
-      game.LelCom();
+      // game.LelCom();
       if(game.sfxValueNotifier.value){
         FlameAudio.play(MyGame.plasticT);
       }
