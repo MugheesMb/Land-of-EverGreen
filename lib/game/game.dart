@@ -33,8 +33,7 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
   static const enemyT = 'enemy.wav';
   static const jumpT = 'jump.wav';
   static const plasticT = 'plastic.wav';
-  static const bgM = 'bgM.wav';
-  static const storyM = 'story.wav';
+  
 
 
   final  musicValueNotifier = ValueNotifier(true);
@@ -49,9 +48,10 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
 
     await Flame.device.setLandscape();
     await Flame.device.fullScreen();
-    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT,bgM,storyM]);
-    bu = await Sprite.load('enemy.png');
     await add(router);
+    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
+    bu = await Sprite.load('enemy.png');
+    
   }
 
 
