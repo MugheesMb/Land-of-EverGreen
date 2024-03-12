@@ -47,9 +47,12 @@ class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame
   static const enemyT = 'enemy.wav';
   static const jumpT = 'jump.wav';
   static const plasticT = 'plastic.wav';
+  static const bgM = 'bgM.wav';
+  static const storyM = 'story.wav';
 
   GamePlay(this.currentLevel,  {super.key, this.onPausePressed} );
   static const id  = 'GamePlay';
+
 
   final fixedResolution = Vector2(620, 320);
   final int currentLevel;
@@ -70,11 +73,19 @@ class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame
 
   late Hud hud;
  // final hud = Hud();
+static const _bgmVol = 0.1;
+  AudioPlayer? _bgMusic;
   @override
   Future<void> onLoad() async {
 
-    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
+    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT,bgM,storyM]);
 print('current: $currentLevel' );
+
+
+    if(game.musicValueNotifier.value) {
+      _bgMusic = await  FlameAudio.loopLongAudio(MyGame.bgM, volume: _bgmVol );
+    }
+
       final map = await TiledComponent.load('mb3.tmx', Vector2.all(16));
 
 
@@ -267,6 +278,13 @@ if(objects != null) {
     return super.onLoad();
 
   }
+
+
+
+  @override
+  void onRemove(){
+    _bgMusic?.dispose();
+}
   void triggerCameraShake() {
     // Ensure the effect is reset and ready to run again
     _camShake.reset();

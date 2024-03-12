@@ -1,12 +1,15 @@
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'game.dart';
 
 class SceneShowcase extends StatefulWidget {
 
   static const id  = 'SceneShowcase';
   final VoidCallback onGameStart;
-
-  SceneShowcase({required this.onGameStart});
+  final MyGame gameRef;
+  SceneShowcase( {required this.onGameStart , required this.gameRef});
 
   @override
   _SceneShowcaseState createState() => _SceneShowcaseState();
@@ -30,13 +33,20 @@ class _SceneShowcaseState extends State<SceneShowcase> {
   Timer? _timer;
   String _animatedText = '';
   Timer? _textAnimationTimer;
+  AudioPlayer? _bgMusic;
 
   @override
   void initState() {
     super.initState();
+    if(widget.gameRef.musicValueNotifier.value) {
+      FlameAudio.loopLongAudio(MyGame.storyM, volume: 0.6).then((audioPlayer) {
+        _bgMusic = audioPlayer;
+      });
+    }
     _startSceneShowcase();
     _animateText(_texts[_currentIndex]);
   }
+
 
   void _startSceneShowcase() {
     _timer = Timer(Duration(seconds: 7), () {
@@ -70,7 +80,9 @@ class _SceneShowcaseState extends State<SceneShowcase> {
 
   @override
   void dispose() {
+    _bgMusic?.dispose();
     _timer?.cancel();
+
     _textAnimationTimer?.cancel();
     super.dispose();
   }
@@ -85,7 +97,6 @@ class _SceneShowcaseState extends State<SceneShowcase> {
     _timer?.cancel();
     _showButton();
   }
-
   void _startGame() {
     widget.onGameStart(); // Invoke the callback when the "Start Game" button is pressed.
   }

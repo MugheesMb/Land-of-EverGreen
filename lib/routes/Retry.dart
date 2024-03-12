@@ -63,8 +63,8 @@ class RetryMenu extends StatelessWidget {
                 width: 200,
                 child: InkWell(
                   onTap: () {
-                    gameRef.resumeEngine();
-                  gameRef.popRoute();
+                  //   gameRef.resumeEngine();
+                  // gameRef.popRoute();
                   gameRef.router.pushReplacementNamed(TrashScreen.id);
                     // gameRef.overlays.remove(PauseMenu.id);
                     // gameRef.overlays.add(PauseButton.ID);

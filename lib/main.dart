@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
         'assets/images/exit.png',
         'assets/images/next.png',
         'assets/images/collection.png',
-        'assets/images/retry.png'
+        'assets/images/retry.png',
       'assets/images/MM.gif',
       'assets/images/m1.gif',
       'assets/images/m2.gif',
@@ -142,7 +142,7 @@ class _MyAppState extends State<MyApp> {
         fontFamily: "Rexlia",
       ),
       debugShowCheckedModeBanner: false,
-      home:BootScreen(isLoading: _loading),
+      home: BootScreen(isLoading: _loading),
     );
   }
 }

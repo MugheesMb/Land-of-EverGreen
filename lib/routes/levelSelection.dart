@@ -41,16 +41,16 @@ class LevelSelection extends StatelessWidget {
                 'Select Level',
                 style: TextStyle(fontSize: 30, color: Colors.white),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height:10),
               SizedBox(
                 width: size.width,
                 child: Center(
                   child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 200,
-                      //mainAxisExtent: 150,
+                      mainAxisExtent: size.height*0.31,
                       crossAxisSpacing: 15,
-                      mainAxisSpacing: 10,
+                      mainAxisSpacing: 5,
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
@@ -61,8 +61,8 @@ class LevelSelection extends StatelessWidget {
                             Column(
                             children: [
                               Container(
-                                height: 100,
-                                width:100,
+                                height: size.height*0.20,
+                                width:size.height*0.20,
                                 decoration:const  BoxDecoration(
                                   color: Colors.grey,
                                   borderRadius: BorderRadius.all(Radius.circular(15))
@@ -97,7 +97,7 @@ class LevelSelection extends StatelessWidget {
                     },
                     itemCount: 6,
                     shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 100),
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
                   ),
                 ),
                 ),
@@ -108,7 +108,6 @@ class LevelSelection extends StatelessWidget {
                     icon:const Icon(Icons.arrow_back, color: Colors.black)
                   ),
               ),
-              const SizedBox(height: 5),
                 
               ],
             ),

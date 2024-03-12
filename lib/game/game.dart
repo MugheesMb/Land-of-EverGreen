@@ -1,3 +1,4 @@
+import 'package:ever_green/routes/recycle_screen.dart';
 import 'package:ever_green/routes/trash_screen.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -32,6 +33,8 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
   static const enemyT = 'enemy.wav';
   static const jumpT = 'jump.wav';
   static const plasticT = 'plastic.wav';
+  static const bgM = 'bgM.wav';
+  static const storyM = 'story.wav';
 
 
   final  musicValueNotifier = ValueNotifier(true);
@@ -46,7 +49,7 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
 
     await Flame.device.setLandscape();
     await Flame.device.fullScreen();
-    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
+    await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT,bgM,storyM]);
     bu = await Sprite.load('enemy.png');
     await add(router);
   }
@@ -55,6 +58,7 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
 
   late final _routes  = <String, Route> {
     MainMenu.id: OverlayRoute((context,game) => MainMenu(
+      gameRef: this,
       onPlayPressed: () => _routeById(LevelSelection.id),
       onSettingPressed: () => _routeById(Settings.id),
     )),

@@ -43,8 +43,8 @@ class TrashScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: 200,
-                    width: 200,
+                      height: size.height*0.30,
+                    width: size.height*0.30,
                       decoration: BoxDecoration(
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(15),
@@ -60,7 +60,7 @@ class TrashScreen extends StatelessWidget {
                               const SizedBox(height: 10,),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text("${gameRef.plData.score.value}x Coins", style: TextStyle(color: Colors.black, fontSize: 18, ),),
+                                child: Text("${gameRef.plData.score.value}x Coins", style: TextStyle(color: Colors.black, fontSize: 16, ),),
                               ),
                              ],
                           ),
@@ -69,8 +69,8 @@ class TrashScreen extends StatelessWidget {
                     ),
                   const SizedBox(width: 20), // Adds space between the images
                    Container(
-                    height: 200,
-                    width: 200,
+                    height: size.height*0.30,
+                    width: size.height*0.30,
                       decoration: BoxDecoration(
                         border: Border.all(),
                         color:Colors.grey,
@@ -82,10 +82,10 @@ class TrashScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset('assets/images/cup.png',width:100),
+                              Image.asset('assets/images/cup.png',width:size.height*.10),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text("${gameRef.plData.plastic.value}x Plastic", style: TextStyle(color: Colors.black, fontSize: 18, ),),
+                                child: Text("${gameRef.plData.plastic.value}x Plastic", style: TextStyle(color: Colors.black, fontSize: 15, ),),
                               ),
                             ],
                           ),
@@ -96,8 +96,8 @@ class TrashScreen extends StatelessWidget {
                 ),
                 const SizedBox(height:20),
                 Container(
-                  width: size.width/2,
-                  
+                  width: size.width/1.5,
+                  height: size.height*0.30,
                   decoration: BoxDecoration(
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(15)
@@ -111,12 +111,12 @@ class TrashScreen extends StatelessWidget {
                           const Text("Learn how can you recycle plastic", style: TextStyle(color: Colors.black, fontSize: 20),),
                           const SizedBox(width: 10,),
                           SizedBox(
-                            height: 100,
-                            width:100,
+                            height: size.height*.15,
+                            width:size.height*.15,
                             child: Image.asset("assets/images/recycle.png"))]
                       ),
                       SizedBox(
-                        width:200,
+                        width:size.height*.25,
                         child: InkWell(
                           onTap: (){
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => StepsScreen()));
@@ -133,7 +133,6 @@ class TrashScreen extends StatelessWidget {
               width: 200,
               child: InkWell(
                 onTap:(){
-                  //Navigator.of(context).pop();
                   gameRef.resumeEngine();
                   gameRef.popRoute();
 

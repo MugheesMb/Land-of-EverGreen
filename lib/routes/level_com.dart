@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:html' as html;
 import 'package:add_to_google_wallet/add_to_google_wallet.dart';
 import 'package:add_to_google_wallet/widgets/add_to_google_wallet_button.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
