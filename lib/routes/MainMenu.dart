@@ -139,23 +139,30 @@ class MainMenu extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 50.0),
-                    child: Text(
-                      'Land of EverGreen',
-                      style: TextStyle(
-                        fontSize: 50.0,
-                        color: Colors.black,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 20.0,
-                            color: Colors.white,
-                            offset: Offset(0, 0),
-                          )
-                        ],
+                                    Container(
+                    decoration: BoxDecoration(
+                     color: Colors.black.withOpacity(0.2),
+                     borderRadius: BorderRadius.circular(15) 
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 10),
+                      child: Text(
+                        'Land of EverGreen',
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 20.0,
+                              color: Colors.white,
+                              offset: Offset(0, 0),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
+
                   InkWell(
                     onTap: (){
                           // Navigate to the SceneShowcase widget
@@ -182,9 +189,9 @@ class MainMenu extends StatelessWidget {
                       ),
                   ),
 
-                  const SizedBox(
-                    height: 30.0,
-                  ),
+                  // const SizedBox(
+                  //   height: 30.0,
+                  // ),
                   InkWell(
                     onTap: onSettingPressed,
                     child: SizedBox(
@@ -192,9 +199,9 @@ class MainMenu extends StatelessWidget {
                       child: Image.asset("assets/images/settings.png")
                     ),
                   ),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
+                  // const SizedBox(
+                  //   height: 30.0,
+                  // ),
                   InkWell(
                     onTap: (){
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => StepsScreen(), ));

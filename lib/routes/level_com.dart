@@ -31,6 +31,8 @@ class LevComplete extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   // String isMobile = String.fromEnvironment("fr");
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromARGB(210, 229, 238, 238),
       body: Center(
@@ -43,14 +45,17 @@ class LevComplete extends StatelessWidget {
             ),
 
             const SizedBox(height: 15),
-            SizedBox(
-              width: 200,
-              child: InkWell(
-                onTap: () {},
-                child: Image.asset("assets/images/next.png"),
-              ),
-            ),
-            const SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 200,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Image.asset("assets/images/next.png"),
+                  ),
+                ),
+                const SizedBox(width: 5),
             SizedBox(
               width: 200,
               child: InkWell(
@@ -64,23 +69,29 @@ class LevComplete extends StatelessWidget {
                 child: Image.asset("assets/images/retry.png"),
               ),
             ),
+              ],
+            ),
+            
             
             const SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 200,
+                  child: InkWell(
+                    onTap:(){
+                      gameRef.resumeEngine();
+                      gameRef.popRoute();
+                
+                      gameRef.router.pushReplacementNamed(MainMenu.id);
+                    },
+                    child: Image.asset("assets/images/exit.png"),
+                  ),
+                ),
+                const SizedBox(width: 5),
             SizedBox(
               width: 200,
-              child: InkWell(
-                onTap:(){
-                  gameRef.resumeEngine();
-                  gameRef.popRoute();
-
-                  gameRef.router.pushReplacementNamed(MainMenu.id);
-                },
-                child: Image.asset("assets/images/exit.png"),
-              ),
-            ),
-            const SizedBox(height: 5),
-            SizedBox(
-              width: 250,
               child: InkWell(
                 onTap: () {
                   gameRef.resumeEngine();
@@ -95,6 +106,9 @@ class LevComplete extends StatelessWidget {
                 child: Image.asset("assets/images/collection.png"),
               ),
             ),
+              ],
+            ),
+            
             const SizedBox(height: 10,),
             //isAndroid()
             
@@ -106,8 +120,8 @@ class LevComplete extends StatelessWidget {
                 InkWell(
                   onTap:(){_savePassBrowser();},
                   child: SizedBox(
-                    height: 250,
-                    width: 250,
+                    height: size.height*0.35,
+                    width: size.height*0.35,
                     child: Image.asset("assets/images/wallet.png"))
                 ),
               ],
