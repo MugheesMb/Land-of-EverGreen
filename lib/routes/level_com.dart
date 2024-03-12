@@ -45,45 +45,45 @@ class LevComplete extends StatelessWidget {
 
             const SizedBox(height: 15),
             SizedBox(
-              width: 150,
-              child: OutlinedButton(
-                onPressed: () {},
-                child: const Text('Next'),
+              width: 200,
+              child: InkWell(
+                onTap: () {},
+                child: Image.asset("assets/images/next.png"),
               ),
             ),
             const SizedBox(height: 5),
             SizedBox(
-              width: 150,
-              child: OutlinedButton(
-                onPressed: () {
+              width: 200,
+              child: InkWell(
+                onTap: () {
                   var gameplay = gameRef.findByKeyName<GamePlay>(GamePlay.id);
                   if(gameplay != null) {
                     gameRef.startLevel(gameplay.currentLevel);
                     gameRef.resumeEngine();
                   }
                 },
-                child: const Text('Retry'),
+                child: Image.asset("assets/images/retry.png"),
               ),
             ),
             
             const SizedBox(height: 5),
             SizedBox(
-              width: 150,
-              child: OutlinedButton(
-                onPressed:(){
+              width: 200,
+              child: InkWell(
+                onTap:(){
                   gameRef.resumeEngine();
                   gameRef.popRoute();
 
                   gameRef.router.pushReplacementNamed(MainMenu.id);
                 },
-                child: const Text('Exit'),
+                child: Image.asset("assets/images/exit.png"),
               ),
             ),
             const SizedBox(height: 5),
             SizedBox(
               width: 250,
-              child: OutlinedButton(
-                onPressed: () {
+              child: InkWell(
+                onTap: () {
                   gameRef.resumeEngine();
                   gameRef.popRoute();
                   gameRef.router.pushReplacementNamed(TrashScreen.id);
@@ -93,24 +93,16 @@ class LevComplete extends StatelessWidget {
                   //   gameRef.resumeEngine();
                   // }
                 },
-                child: const Text('View Your Collection'),
+                child: Image.asset("assets/images/collection.png"),
               ),
             ),
             const SizedBox(height: 10,),
             //isAndroid()
             
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,  
               children: [
-                Row(
-                  children: [
-                    const Text("Add your Eco Balls to you Google Wallet"),
-                    SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: Image.asset("assets/images/eco.png"))
-                  ],
-                ),
+                const Text("Add your Eco Balls to you Google Wallet"),
                 const SizedBox(width: 50,),
                 InkWell(
                   onTap:(){_savePassBrowser();},

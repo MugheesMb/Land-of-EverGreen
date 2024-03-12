@@ -1,8 +1,10 @@
+import 'package:ever_green/routes/trash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import '../game/story.dart';
+import 'recycle_screen.dart';
 
 
 class MainMenu extends StatelessWidget {
@@ -43,33 +45,51 @@ class MainMenu extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 3,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to the SceneShowcase widget
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => SceneShowcase(
-                            onGameStart: () {
-                              // Pop back to the MainMenu and then invoke the onPlayPressed callback
-                              Navigator.of(context).pop();
-                              onPlayPressed?.call();
-                            },
-                          ),
-                        ));
-                      },
-                      child: const Text('play'),
-                    ),
-                    ),
+                  InkWell(
+                    onTap: (){
+                          // Navigate to the SceneShowcase widget
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SceneShowcase(
+                              onGameStart: () {
+                                // Pop back to the MainMenu and then invoke the onPlayPressed callback
+                                Navigator.of(context).pop();
+                                onPlayPressed?.call();
+                              },
+                            ),
+                          ));
+                    },
+                    child: SizedBox(
+                      width: 200,
+                      child: Image.asset("assets/images/play-btn.png") 
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      
+                      //   },
+                      //   child: const Text('play'),
+                      // ),
+                      ),
+                  ),
 
                   const SizedBox(
                     height: 30.0,
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 3,
-                    child: ElevatedButton(
-                      onPressed: onSettingPressed,
-                      child: const Text('Settings'),
+                  InkWell(
+                    onTap: onSettingPressed,
+                    child: SizedBox(
+                      width: 200,
+                      child: Image.asset("assets/images/settings.png")
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => StepsScreen(), ));
+                    },
+                    child: SizedBox(
+                      width: 200,
+                      child: Image.asset("assets/images/learn.png")
                     ),
                   ),
                 ],

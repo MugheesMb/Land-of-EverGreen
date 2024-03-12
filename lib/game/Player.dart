@@ -18,7 +18,7 @@ import 'bullet.dart';
 
 
 class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , CollisionCallbacks, KeyboardHandler {
-  Player({super.position,super.size ,  Iterable<Component>? children,}): super(
+  Player({super.position, super.size, Iterable<Component>? children,}) : super(
     children: children,
   );
 
@@ -39,6 +39,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
   SpriteAnimation? _jumpAnimation;
   double startY = 0; // Y-coordinate when the jump starts
   bool hasJumped = false;
+
   @override
   Future<void> onLoad() async {
     _walkingAnimation = await SpriteAnimation.fromFrameData(
@@ -51,7 +52,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     );
 
 
-    _idleAnimation =  await SpriteAnimation.fromFrameData(
+    _idleAnimation = await SpriteAnimation.fromFrameData(
       Flame.images.fromCache('her3.png'),
       SpriteAnimationData.sequenced(
         amount: 1,
@@ -77,18 +78,16 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     anchor = Anchor.bottomCenter;
     // final double radius = size.minDimension / 2;
     await add(CircleHitbox.relative(1, parentSize: Vector2(95, 95)));
-
-
   }
-
 
 
   @override
   void update(double dt) {
     bool isInAir = !_isOnGround;
-    print("Velocity Y: $_velocity.y, IsOnGround: $_isOnGround, JumpInput: $_jumpInput , isInnAir: $isInAir , hasJumped: $hasJumped, startY: $startY");
+    print(
+        "Velocity Y: $_velocity.y, IsOnGround: $_isOnGround, JumpInput: $_jumpInput , isInnAir: $isInAir , hasJumped: $hasJumped, startY: $startY");
     // Apply horizontal movement based on input.
-    if (_nHitboxesInContact == 0 && _isOnGround &&  _velocity.y == 0) {
+    if (_nHitboxesInContact == 0 && _isOnGround && _velocity.y == 0) {
       _isOnGround = false;
     }
     _velocity.x = hAxisInput * _movespeed;
@@ -97,7 +96,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     if (actionInitiated) {
       if (!_isOnGround) {
         // Apply gravity
-        _velocity.y +=  _firstJump ? _gravityy : _gravity;
+        _velocity.y += _firstJump ? _gravityy : _gravity;
       } else if (!_jumpInput) {
         // Ensure the player doesn't keep sinking or floating if they are on the ground and not jumping
         _velocity.y = 0;
@@ -105,12 +104,9 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     }
     // Handle jumping logic - only jump if on the ground.
     if (_jumpInput && _isOnGround) {
-
-      if(game.sfxValueNotifier.value){
+      if (game.sfxValueNotifier.value) {
         FlameAudio.play(MyGame.jumpT);
       }
-
-
       _velocity.y = -_jumpSpeed; // Apply jump velocity upwards.
       _isOnGround = false; // Player leaves the ground.
       _jumpInput = false; // Reset jump input to prevent repeated jumps.
@@ -126,8 +122,6 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
     // Update the player's position based on the velocity.
     position += _velocity * dt;
-
-
 
 
     // Check for the start of a jump
@@ -171,8 +165,6 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     }
 
 
-
-
     // Handle player orientation based on movement direction.
     if (hAxisInput < 0 && scale.x > 0) {
       flipHorizontallyAroundCenter();
@@ -190,8 +182,8 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
     hAxisInput = 0;
 
-    hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;
-    hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyD) ? 1 : 0;
+    hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyA) || keysPressed.contains(LogicalKeyboardKey.arrowLeft) ? -1 : 0;
+    hAxisInput += keysPressed.contains(LogicalKeyboardKey.keyD) || keysPressed.contains(LogicalKeyboardKey.arrowRight) ? 1 : 0;
     _jumpInput = keysPressed.contains(LogicalKeyboardKey.space);
     if (hAxisInput != 0 && hAxisInput != previousHAxisInput) {
       actionInitiated = true;
@@ -219,8 +211,6 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-
-
     if (other is Platform || other is TrailPoly) {
       if (intersectionPoints.length == 2) {
         // Calculate the collision normal and separation distance.
@@ -244,7 +234,9 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
       }
     }
   }
-  void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
+
+  void onCollisionStart(Set<Vector2> intersectionPoints,
+      PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
     ++_nHitboxesInContact;
   }
@@ -254,6 +246,7 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
     super.onCollisionEnd(other);
     --_nHitboxesInContact;
   }
+
   void hit() {
     add(
       OpacityEffect.fadeOut(
@@ -269,5 +262,19 @@ class Player extends SpriteAnimationComponent with HasGameRef<MyGame> , Collisio
   void jump() {
     _jumpInput = true;
     _isOnGround = true;
+  }
+
+  void jump2() {
+    if (_isOnGround) {
+      if (game.sfxValueNotifier.value) {
+        FlameAudio.play(MyGame.jumpT);
+      }
+      _velocity.y = -_jumpSpeed; // Apply jump velocity upwards.
+      _isOnGround = false; // Player leaves the ground.
+
+      if (_firstJump) {
+        _firstJump = false; // Mark that the first jump has occurred
+      }
+    }
   }
 }

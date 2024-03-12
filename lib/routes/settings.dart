@@ -1,3 +1,4 @@
+import 'package:flame/experimental.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -23,13 +24,14 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
               'Settings',
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 30, color: Colors.white),
             ),
             const SizedBox(height: 15),
             SizedBox(
@@ -43,7 +45,7 @@ class Settings extends StatelessWidget {
                     title: child,
                   );
                 },
-                child: const Text('Music'),
+                child: const Text('Music', style: TextStyle(color: Colors.white),),
               ),
             ),
             const SizedBox(height: 5),
@@ -58,13 +60,15 @@ class Settings extends StatelessWidget {
                     title: child,
                   );
                 },
-                child: const Text('Sfx'),
+                child: const Text('Sfx', style: TextStyle(color: Colors.white),),
               ),
             ),
             const SizedBox(height: 5),
-            IconButton(
-              onPressed: onBackPressed,
-              icon: const Icon(Icons.arrow_back_rounded),
+            CircleAvatar(
+              child: IconButton(
+                onPressed: onBackPressed,
+                icon: const Icon(Icons.arrow_back_rounded),
+              ),
             )
           ],
         ),

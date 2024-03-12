@@ -3,6 +3,7 @@ import 'package:ever_green/game/game.dart';
 import 'package:ever_green/routes/GamePlay.dart';
 
 import 'MainMenu.dart';
+import 'trash_screen.dart';
 
 
 class RetryMenu extends StatelessWidget {
@@ -40,9 +41,9 @@ class RetryMenu extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
-                child: ElevatedButton(
-                  onPressed: () {
+                width: 200,
+                child: InkWell(
+                  onTap: () {
                     // gameRef.overlays.remove(PauseMenu.id);
                     // gameRef.overlays.add(PauseButton.ID);
                     // gameRef.reset();
@@ -52,16 +53,19 @@ class RetryMenu extends StatelessWidget {
                       gameRef.resumeEngine();
                     }
                   },
-                  child: const Text('Retry'),
+                  child: Image.asset("assets/images/retry.png"),
                 ),
               ),
               const SizedBox(
                 height: 10.0,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
-                child: ElevatedButton(
-                  onPressed: () {
+                width: 200,
+                child: InkWell(
+                  onTap: () {
+                    gameRef.resumeEngine();
+                  gameRef.popRoute();
+                  gameRef.router.pushReplacementNamed(TrashScreen.id);
                     // gameRef.overlays.remove(PauseMenu.id);
                     // gameRef.overlays.add(PauseButton.ID);
                     // gameRef.reset();
@@ -71,16 +75,16 @@ class RetryMenu extends StatelessWidget {
                     //   gameRef.resumeEngine();
                     //}
                   },
-                  child: const Text('View Your Collection'),
+                  child: Image.asset("assets/images/collection.png"),
                 ),
               ),
               const SizedBox(
                 height: 10.0,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
-                child: ElevatedButton(
-                  onPressed: () {
+                width: 200,
+                child: InkWell(
+                  onTap: () {
                     // gameRef.overlays.remove(PauseMenu.id);
                     // gameRef.reset();
                     gameRef.resumeEngine();
@@ -88,7 +92,7 @@ class RetryMenu extends StatelessWidget {
       
                     gameRef.router.pushReplacementNamed(MainMenu.id);
                   },
-                  child: const Text('Exit'),
+                  child:Image.asset("assets/images/exit.png"),
                 ),
               ),
             ],

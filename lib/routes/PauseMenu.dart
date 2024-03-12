@@ -29,7 +29,7 @@ class PauseMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Settings',
+                'Pause',
                 style: TextStyle(fontSize: 30),
               ),
               const SizedBox(height: 15),
@@ -51,26 +51,25 @@ class PauseMenu extends StatelessWidget {
                 height: 10.0,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
-                child: ElevatedButton(
-                  onPressed: () {
+                width: 200,
+                child: InkWell(
+                  onTap: () {
                     // _mygame.resumeEngine();
                     gameRef.resumeEngine();
                     //  gameRef.overlays.remove(PauseMenu.id);
                     gameRef.popRoute();
                     //   gameRef.overlays.add(PauseButton.ID);
                   },
-                  child: const Text('Resume')
-                  ,
+                  child: Image.asset("assets/images/resume-btn.png")
                 ),
               ),
               const SizedBox(
                 height: 10.0,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
-                child: ElevatedButton(
-                  onPressed: () {
+                width: 200,
+                child: InkWell(
+                  onTap: () {
                     // gameRef.overlays.remove(PauseMenu.id);
                     // gameRef.overlays.add(PauseButton.ID);
                     // gameRef.reset();
@@ -80,16 +79,16 @@ class PauseMenu extends StatelessWidget {
                       gameRef.resumeEngine();
                     }
                   },
-                  child: const Text('Restart'),
+                  child: Image.asset("assets/images/restart-btn.png"),
                 ),
               ),
               const SizedBox(
                 height: 10.0,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
-                child: ElevatedButton(
-                  onPressed: () {
+                width: 200,
+                child: InkWell(
+                  onTap: () {
                     // gameRef.overlays.remove(PauseMenu.id);
                     // gameRef.reset();
                     gameRef.resumeEngine();
@@ -97,7 +96,7 @@ class PauseMenu extends StatelessWidget {
 
                     gameRef.router.pushReplacementNamed(MainMenu.id);
                   },
-                  child: const Text('Exit'),
+                  child: Image.asset("assets/images/exit.png"),
                 ),
               ),
             ],

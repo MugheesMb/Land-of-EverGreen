@@ -56,7 +56,7 @@ class ContainerPaddingExample extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.purple,
+            color: Colors.grey,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
@@ -67,7 +67,7 @@ class ContainerPaddingExample extends StatelessWidget {
                   '${index + 1}. ${heading[index]}',
                   style: const TextStyle(
                     fontSize: 30, // Large font number
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -76,7 +76,7 @@ class ContainerPaddingExample extends StatelessWidget {
                 '${desc[index]}', // Small text on the right
                 style: const TextStyle(
                   fontSize: 16, // Normal font
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               SizedBox(

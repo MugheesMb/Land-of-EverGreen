@@ -36,6 +36,8 @@ import 'package:flame_audio/flame_audio.dart';
 
 import 'package:flutter/widgets.dart';
 
+import '../hud/touchJoy.dart';
+
 
 
 class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame>{
@@ -53,7 +55,7 @@ class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame
   final int currentLevel;
   final VoidCallback? onPausePressed;
   late Sprite _sprite;
-  late Player _player;
+  late Player player;
   late final CameraComponent camera;
   late final _camShake = MoveEffect.by(
     Vector2(3, 0),
@@ -66,10 +68,11 @@ class GamePlay extends Component with  KeyboardHandler , HasGameReference<MyGame
 
 
 
-
-  final hud = Hud();
+  late Hud hud;
+ // final hud = Hud();
   @override
   Future<void> onLoad() async {
+
     await FlameAudio.audioCache.loadAll([coinT,ecoT,enemyT,plasticT,jumpT]);
 print('current: $currentLevel' );
       final map = await TiledComponent.load('mb3.tmx', Vector2.all(16));
@@ -88,7 +91,7 @@ print('current: $currentLevel' );
     game.plData.plastic.value = 0;
 //camera.follow(player);
     camera.moveTo(camera.viewport.virtualSize * 0.5);
-    await camera.viewport.addAll([hud]);
+
     await camera.viewfinder.add(_camShake);
 
 
@@ -161,6 +164,8 @@ for (final gemm in ground!.objects) {
       }
     }
 
+
+
 final spawnPointLayer = map.tileMap.getLayer<ObjectGroup>('SpawnPoints');
 final objects = spawnPointLayer?.objects;
 
@@ -170,6 +175,17 @@ if(objects != null) {
     final size = Vector2(objc.width, objc.height);
 
     switch(objc.class_){
+
+      case 'ground2':
+
+        final gro2 = Platform(
+          position: position,
+          size: size,
+          anchor: Anchor.centerLeft
+          ,);
+
+        await world.add(gro2);
+        break;
       case 'Player':
         final halfSize = size * 0.5;
         final levelBounds = Rect.fromLTWH(
@@ -178,7 +194,7 @@ if(objects != null) {
           map.size.x - halfSize.x,
           map.size.y - halfSize.y,
         );
-        _player = Player(
+        player = Player(
           position: position ,
           children: [
             BoundedPositionBehavior(
@@ -188,7 +204,8 @@ if(objects != null) {
 
         );
           //..debugMode = true;
-        await world.add(_player);
+
+        await world.add(player);
         break;
       case 'coins':
         var gim =  Gem()
@@ -243,6 +260,9 @@ if(objects != null) {
   _setupCamera(map);
 }
 
+    hud = Hud(player: player);
+    await camera.viewport.addAll([hud, ]);
+
   /*  Bullet bullet = Bullet(
       sprite:  game.bu,
       size: Vector2(54, 54),
@@ -281,7 +301,7 @@ if(objects != null) {
 
 void _setupCamera(TiledComponent level) {
 
-    camera.follow(_player, maxSpeed: 250);
+    camera.follow(player, maxSpeed: 250);
    camera.setBounds(
       Rectangle.fromLTRB(
 

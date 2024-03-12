@@ -104,7 +104,7 @@ class _SceneShowcaseState extends State<SceneShowcase> {
                   ? ElevatedButton(
                 key: ValueKey('startButton'),
                 onPressed: _startGame,
-                child: Text('Start Game'),
+                child: Image.asset("assets/images/go.png"),
               )
                   : Image.asset(
                 _scenes[_currentIndex],
@@ -133,9 +133,12 @@ class _SceneShowcaseState extends State<SceneShowcase> {
             Positioned(
               bottom: 20.0,
               right: 20.0,
-              child: ElevatedButton(
-                onPressed: _skipShowcase,
-                child: Text('Skip'),
+              child: SizedBox(
+                width: 200,
+                child: InkWell(
+                  onTap: _skipShowcase,
+                  child: Image.asset("assets/images/skip.png"),
+                ),
               ),
             ),
         ],

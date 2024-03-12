@@ -36,7 +36,7 @@ class MyGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerCom
 
   final  musicValueNotifier = ValueNotifier(true);
   final  sfxValueNotifier = ValueNotifier(true);
-  final  vJoyValueNotifier = ValueNotifier(true);
+  final  vJoyValueNotifier = ValueNotifier(false);
   final plData = PlayData();
   late Sprite bu;
 

@@ -1,24 +1,19 @@
-/*
-import 'package:ever_green/game/Player.dart';
-import 'package:ever_green/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/input.dart';
-import 'package:flutter/widgets.dart';
-
+import 'package:ever_green/game/game.dart';
+import 'package:flame/flame.dart';
 import '../game/Player.dart';
 
+import 'package:flame/game.dart';
 
-class TouchControls extends PositionComponent with HasGameRef<MyGame> {
-  final Player Player;
+
+
+class TouchControls extends PositionComponent
+    with HasGameReference<MyGame> {
+
+  final Player player;
   TouchControls({
-    required Sprite joystickKnob,
-    required Sprite joystickBackground,
-    */
-/*required Sprite attackButton,
-    required Sprite attackButtonDown,
-    required Sprite pauseButton*//*
-
-    required this.fluttor,
+    required this.player,
     super.position,
     super.size,
     super.scale,
@@ -28,110 +23,95 @@ class TouchControls extends PositionComponent with HasGameRef<MyGame> {
     super.priority,
   })  : joystick = JoystickComponent(
     knob: SpriteComponent(
-      sprite: joystickKnob,
-      size: Vector2.all(100),
+      sprite: Sprite(Flame.images.fromCache('SmallHandleFilledGrey.png')),
+      size: Vector2.all(40),
     ),
     background: SpriteComponent(
-        sprite: joystickBackground, size: Vector2.all(200)),
-    margin: const EdgeInsets.only(left: 100, bottom: 100),
-    knobRadius: 60,
-  ),
-       */
-/* attackButton = HudButtonComponent(
-          button: SpriteComponent(sprite: attackButton, size: Vector2.all(100)),
+      sprite: Sprite(Flame.images.fromCache('Joystick.png')),
+      size: Vector2.all(70),
+    ),
+    position: Vector2(80,250),
+    knobRadius: 40,
+  ),attackButton = HudButtonComponent(
+          button: SpriteComponent(sprite: Sprite(Flame.images.fromCache('SmallHandle.png')),
+              size: Vector2.all(50)),
           buttonDown: SpriteComponent(
-            sprite: attackButtonDown,
-            size: Vector2.all(80),
+            sprite: Sprite(Flame.images.fromCache('SmallHandleFilledGrey.png')),
+            size: Vector2.all(30),
           ),
-          margin: const EdgeInsets.only(right: 150, bottom: 150),
-        ),
-        pauseButton = HudButtonComponent(
-          button: SpriteComponent(sprite: pauseButton, size: Vector2.all(50)),
-          margin: const EdgeInsets.only(top: 30, right: 30),
-        ) {
-    positionType = PositionType.viewport;*//*
+          position: Vector2(500,230),
+        );
 
-  }
 
-  late final JoystickComponent joystick;
-  */
-/*final HudButtonComponent attackButton;
-  final HudButtonComponent pauseButton;*//*
-
+  final JoystickComponent joystick;
+  final HudButtonComponent attackButton;
 
   @override
-  Future<void>? onLoad() async {
-    await add(pauseButton);
-  */
-/*  pauseButton.onPressed = onPauseButtonPressed;
-    attackButton.onPressed = onAttackButtonPressed;*//*
+  Future<void> onLoad() async {
+
+    attackButton.onPressed = onAttackButtonPressed;
+    game.vJoyValueNotifier.addListener(onVirutalJoystickSettingsChanged);
 
 
-    gameRef.settings.virtualJoystick
-        .addListener(onVirutalJoystickSettingsChanged);
 
-    // add(joystick);
-    // add(attackButton);
-    return super.onLoad();
   }
 
   @override
   void update(double dt) {
-    if (fluttor.state != FluttorState.talking) {
+  //  if (fluttor.state != FluttorState.talking) {
       if (joystick.isMounted) {
         if (joystick.isDragged) {
+          player.actionInitiated = true;
           if (joystick.delta.x > 0.5) {
-            fluttor.xAxisInput = 1;
+            player.hAxisInput = 1;
           } else if (joystick.delta.x < -0.5) {
-            fluttor.xAxisInput = -1;
+            player.hAxisInput = -1;
           } else {
-            fluttor.xAxisInput = 0;
+            player.hAxisInput = 0;
+          }
+
+          switch (joystick.direction) {
+            case JoystickDirection.up:
+            case JoystickDirection.upLeft:
+            case JoystickDirection.upRight:
+              //fluttor.state = FluttorState.jump;
+              break;
+            default:
+              break;
+          }
+
+          if (joystick.delta.y < -0.5 ) {
+
           }
         } else {
-          fluttor.xAxisInput = 0;
+
+          player.hAxisInput = 0;
         }
       }
-    }
-    super.update(dt);
+   // }
   }
 
   @override
   void onRemove() {
-    gameRef.settings.virtualJoystick
-        .removeListener(onVirutalJoystickSettingsChanged);
+    game.vJoyValueNotifier.removeListener(onVirutalJoystickSettingsChanged);
     super.onRemove();
   }
 
- */
-/* void onPauseButtonPressed() {
-    if (gameRef.paused) {
-      AudioManager.resumeBgm();
-      gameRef.resumeEngine();
-      gameRef.overlays.remove(PauseMenu.id);
-    } else {
-      AudioManager.pauseBgm();
-      gameRef.pauseEngine();
-      gameRef.overlays.add(PauseMenu.id);
-    }
-  }*//*
 
 
   void onVirutalJoystickSettingsChanged() {
-    if (gameRef.settings.virtualJoystick.value) {
+    if (game.vJoyValueNotifier.value) {
       add(joystick);
       add(attackButton);
+
     } else {
       joystick.removeFromParent();
       attackButton.removeFromParent();
+
     }
   }
-
-*/
-/*  void onAttackButtonPressed() {
-    if (fluttor.state != FluttorState.talking) {
-      fluttor.state = FluttorState.attack;
-    }
-  }*//*
+  void onAttackButtonPressed() {
+    player.jump2();
+  }
 
 }
-*/

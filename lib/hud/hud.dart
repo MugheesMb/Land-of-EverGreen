@@ -9,6 +9,9 @@ import 'package:flame/camera.dart';
 import 'package:ever_green/game/game.dart';
 import 'package:ever_green/hud/game_data.dart';
 import 'package:flame/text.dart';
+import 'package:ever_green/hud/touchJoy.dart';
+import 'package:ever_green/routes/GamePlay.dart';
+import '../game/Player.dart';
 import '../game/gem.dart';
 import '../routes/PauseMenu.dart';
 import '../routes/Retry.dart';
@@ -20,7 +23,11 @@ import '../routes/Retry.dart';
 
 
 class Hud extends Component with  HasGameReference<MyGame> , ParentIsA<Viewport>   {
-  Hud({super.children,});
+  final Player player;
+
+
+
+  Hud({super.children, required this.player,});
 
   late final TextComponent healthTextComponent;
   late final TextComponent scoreTextComponent;
@@ -29,6 +36,9 @@ class Hud extends Component with  HasGameReference<MyGame> , ParentIsA<Viewport>
 
   @override
   Future<void> onLoad() async {
+
+
+
 
     final _spriteImage = await Sprite(Flame.images.fromCache('play.png'));
     final _spriteImage2 = await Sprite(Flame.images.fromCache('star.png'));
@@ -68,6 +78,14 @@ class Hud extends Component with  HasGameReference<MyGame> , ParentIsA<Viewport>
       position: Vector2(28,6),
     );
     await add(scoreTextComponent);
+
+     final touchControls = TouchControls(
+    //  position:Vector2(50,150),
+      priority: 1,
+       player: player,
+      
+    );
+    await add(touchControls);
 
     final ScoPic2 = SpriteComponent(
 
