@@ -45,8 +45,9 @@ class ContainerPaddingExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       padding: const EdgeInsets.all(10),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // 3 containers per row
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent:650,
+//        crossAxisCount: 3, // 3 containers per row
         crossAxisSpacing: 10, // Horizontal space between containers
         mainAxisSpacing: 10, // Vertical space between containers
         childAspectRatio: 1.3
@@ -80,9 +81,12 @@ class ContainerPaddingExample extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 150,
-                width: 150,
-                child: Image.asset("assets/images/${imgs[index]}",))
+                height: 77,
+                width: 77,
+                child: Image.asset("assets/images/${imgs[index]}",)),
+                const SizedBox(
+                  height: 30,
+                )
             ],
           ),
         );
