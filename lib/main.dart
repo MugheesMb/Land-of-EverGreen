@@ -59,6 +59,17 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _preloadImages() async {
     List<String> images = [
+        'assets/images/play-btn.png',
+        'assets/images/settings.png',
+        'assets/images/learn.png',
+        'assets/images/skip.png',
+        'assets/images/go.png',
+        'assets/images/resume-btn.png',
+        'assets/images/restart-btn.png',
+        'assets/images/exit.png',
+        'assets/images/next.png',
+        'assets/images/collection.png',
+        'assets/images/retry.png'
       'assets/images/MM.gif',
       'assets/images/m1.gif',
       'assets/images/m2.gif',

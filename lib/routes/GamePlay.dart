@@ -176,16 +176,7 @@ if(objects != null) {
 
     switch(objc.class_){
 
-      case 'ground2':
-
-        final gro2 = Platform(
-          position: position,
-          size: size,
-          anchor: Anchor.centerLeft
-          ,);
-
-        await world.add(gro2);
-        break;
+      
       case 'Player':
         final halfSize = size * 0.5;
         final levelBounds = Rect.fromLTWH(

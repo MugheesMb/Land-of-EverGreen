@@ -18,6 +18,7 @@ class LevelSelection extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.black,
       // appBar: AppBar(
       //   backgroundColor: Colors.blue,
       //   leading: IconButton(
@@ -26,8 +27,8 @@ class LevelSelection extends StatelessWidget {
       //           icon: const Icon(Icons.arrow_back_rounded),
       //         ),
       // ),
-      body: ListView(
-        children: [Container(
+      body: 
+          Container(
           width: size.width,
           decoration: const BoxDecoration(
             color: Colors.black
@@ -36,7 +37,6 @@ class LevelSelection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              
               const Text(
                 'Select Level',
                 style: TextStyle(fontSize: 30, color: Colors.white),
@@ -113,8 +113,7 @@ class LevelSelection extends StatelessWidget {
               ],
             ),
               ),
-      ]
-      ),
+      
             
           
     );
