@@ -4,9 +4,9 @@ Welcome to Land of EverGreen, an immersive 2D-pixel art game where you have to R
 
 ## Features 🌲
 
-###Immersive Environments: Explore beautifully crafted landscapes, from polluted industrial areas to green forests, each full of life and interactive parts. Travel through different places, facing obstacles and challenges that test your ability and determination.
+* **Immersive Environments:** Explore beautifully crafted landscapes, from polluted industrial areas to green forests, each full of life and interactive parts. Travel through different places, facing obstacles and challenges that test your ability and determination.
 
-1* **Action-Packed Combat:** Take part in an exciting fight against the enemies, from soldiers of the evil army made by Dr Wasteland. Use a variety of fighting moves and special skills to beat enemies and win.
+* **Action-Packed Combat:** Take part in an exciting fight against the enemies, from soldiers of the evil army made by Dr Wasteland. Use a variety of fighting moves and special skills to beat enemies and win.
 
 * **Environmental Cleanup:** Take on the important job of making Evergreen nice again by gathering scattered plastic waste and pollution from the environment. Each piece of trash you collect helps make the land better, unlocking new places to explore.
 
